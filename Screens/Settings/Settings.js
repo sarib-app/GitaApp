@@ -6,6 +6,7 @@ import { Colors } from '../../Global/Styling/Branding';
 import { FlatList } from 'react-native-gesture-handler';
 import { ChapterListData, SettingOptions } from '../../Global/Data/Data';
 import { useNavigation } from '@react-navigation/native';
+import AuthStyles from '../Auth/AuthStyles';
 const Settings = () => {
 const navigation= useNavigation()
     function ChapterList({item}){
@@ -43,6 +44,13 @@ const navigation= useNavigation()
       }
     }
       />
+      <TouchableOpacity
+onPress={()=>navigation.navigate("Login")}
+style={[AuthStyles.button,{marginTop:20}]}>
+<Text style={AuthStyles.buttonText}>
+    Log Out
+</Text>
+</TouchableOpacity>
 
     </View>
 

@@ -6,9 +6,8 @@ import { Colors } from '../../Global/Styling/Branding';
 import { FlatList } from 'react-native-gesture-handler';
 import { ChapterListData } from '../../Global/Data/Data';
 const HomeScreen = () => {
-
-
-
+    
+    
     function ChapterList({item}){
         return(
             <View style={HomeStyles.chapterContainer}>
@@ -31,7 +30,9 @@ const HomeScreen = () => {
           </View>
         )
     }
-  return (
+    
+    
+    return (
     <View style={GlobalStyles.container}>
       {/* Title */}
     <View style={HomeStyles.container}>
@@ -72,8 +73,10 @@ const HomeScreen = () => {
     </View>
 
     </View>
-  );
-};
+    );
+     
+   
+  };
 
 
 export default HomeScreen;

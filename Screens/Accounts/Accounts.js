@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
-import { FlatList } from 'react-native-gesture-handler';
-import { ChapterListData } from '../../Global/Data/Data';
+import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import AccountStyle from './AccountStyls';
 const AccountScreen = () => {
-
+const navigation = useNavigation()
 
 
   
@@ -18,12 +18,14 @@ const AccountScreen = () => {
       <Text style={AccountStyle.title}>Accounts</Text>
       <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{"Subscription Plan"}</Text>
 
-<View style={AccountStyle.chapterInfo}>
+<TouchableOpacity 
+       onPress={()=> navigation.navigate("SubscribeNow")}
+       style={AccountStyle.chapterInfo}>
        
        <Text style={AccountStyle.chapterTitle}>{"Free Trial"}</Text>
        <Text style={AccountStyle.chapterDescription}>{"Expires in 3 days"}</Text>
     
-     </View>
+     </TouchableOpacity>
      
   
 

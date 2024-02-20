@@ -40,7 +40,7 @@ const SettingOptions = [
     {
         id:1,
         title:"Language Settings",
-        routeTo:""
+        routeTo:"SelectLanguage"
       },  {
         id:1,
         title:"Playback Settings",
@@ -60,4 +60,23 @@ const SettingOptions = [
       },
 ]
 
-export {ChapterListData,SettingOptions}
+const Languages = [
+  {
+    id:1,
+    title:"English",
+  },
+  {
+    id:2,
+    title:"Hindi",
+  },
+  {
+    id:3,
+    title:"Gujrati",
+  },
+  {
+    id:4,
+    title:"Marathi",
+  }
+]
+
+export {ChapterListData,SettingOptions,Languages}

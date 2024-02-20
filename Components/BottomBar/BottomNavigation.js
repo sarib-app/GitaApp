@@ -7,6 +7,7 @@ import SignUpScreen from '../../Screens/Auth/SignUp';
 import { Colors } from '../../Global/Styling/Branding';
 import HomeScreen from '../../Screens/Home/HomeScreen';
 import Settings from '../../Screens/Settings/Settings';
+
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
@@ -30,7 +31,7 @@ const BottomNavigation = () => {
           component={HomeScreen}
           options={{
             tabBarIcon: ({ color }) => (
-              <AntDesign name="login" size={24} color={"white"} />
+              <AntDesign name="book" size={24} color={"white"} />
             ),
             headerShown:false,
           }}

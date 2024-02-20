@@ -25,7 +25,10 @@ const navigation = useNavigation()
       } else {
         setPasswordError('');
       }
+      if(username && password){
+        navigation.navigate("BottomNavigation")
 
+      }
       // Add your login logic here
     };
   
