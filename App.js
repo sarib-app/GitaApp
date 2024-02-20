@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './Screens/Auth/Logins';
 import SignUpScreen from './Screens/Auth/SignUp';
 import BottomNavigation from './Components/BottomBar/BottomNavigation';
+import AccountScreen from './Screens/Accounts/Accounts';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -13,6 +14,8 @@ const App = () => {
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="BottomNavigation" component={BottomNavigation} options={{ headerShown: false }} />
+        <Stack.Screen name="AccountScreen" component={AccountScreen} options={{ headerShown: false }} />
+
 
       </Stack.Navigator>
     </NavigationContainer>

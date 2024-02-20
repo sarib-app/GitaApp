@@ -5,6 +5,8 @@ import { AntDesign } from '@expo/vector-icons';
 import LoginScreen from '../../Screens/Auth/Logins';
 import SignUpScreen from '../../Screens/Auth/SignUp';
 import { Colors } from '../../Global/Styling/Branding';
+import HomeScreen from '../../Screens/Home/HomeScreen';
+import Settings from '../../Screens/Settings/Settings';
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
@@ -24,8 +26,8 @@ const BottomNavigation = () => {
           }}
       >
         <Tab.Screen
-          name="Login"
-          component={LoginScreen}
+          name="HomeScreen"
+          component={HomeScreen}
           options={{
             tabBarIcon: ({ color }) => (
               <AntDesign name="login" size={24} color={"white"} />
@@ -35,11 +37,11 @@ const BottomNavigation = () => {
           
         />
         <Tab.Screen
-          name="SignUp"
-          component={SignUpScreen}
+          name="Settings"
+          component={Settings}
           options={{
             tabBarIcon: ({ color }) => (
-              <AntDesign name="adduser" size={24} color={"white"} />
+              <AntDesign name="setting" size={24} color={"white"} />
             ),
             headerShown:false
 
