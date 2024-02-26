@@ -21,7 +21,7 @@ const BottomNavigation = () => {
           
         }}
         screenOptions={{
-            tabBarStyle: { backgroundColor:Colors.SecondaryDark,height:100,borderTopWidth:0 ,paddingBottom:-10},
+            tabBarStyle: { backgroundColor:Colors.SecondaryDark,height:70,borderTopWidth:0 ,paddingBottom:-10},
             tabBarActiveBackgroundColor:Colors.PrimaryColor,
             tabBarShowLabel:false,
           }}

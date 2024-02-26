@@ -59,7 +59,94 @@ const SettingOptions = [
         routeTo:""
       },
 ]
+const SettingOptionsHindi = [
+  {
+    id:1,
+    title:"खाता सेटिंग्स",
+    routeTo:"AccountScreen"
+  },
+  {
+      id:1,
+      title:"भाषा सेटिंग्स",
+      routeTo:"SelectLanguage"
+    },  {
+      id:1,
+      title:"प्लेबैक सेटिंग्स",
+      routeTo:""
+    },  {
+      id:1,
+      title:"नियम और शर्तें",
+      routeTo:""
+    },  {
+      id:1,
+      title:"खाता विवरण",
+      routeTo:""
+    },  {
+      id:1,
+      title:"हमसे संपर्क करें",
+      routeTo:""
+    },
+]
 
+
+const SettingOptionsGujrati = [
+  {
+    id:1,
+    title:"ખાતા સેટિંગ્સ",
+    routeTo:"AccountScreen"
+  },
+  {
+      id:1,
+      title:"ભાષા સેટિંગ્સ",
+      routeTo:"SelectLanguage"
+    },  {
+      id:1,
+      title:"પ્લેબેક સેટિંગ્સ",
+      routeTo:""
+    },  {
+      id:1,
+      title:"નિયમો અને શરતો",
+      routeTo:""
+    },  {
+      id:1,
+      title:"ખાતા વિગતો",
+      routeTo:""
+    },  {
+      id:1,
+      title:"અમારા સાથે સંપર્ક કરો",
+      routeTo:""
+    },
+]
+
+
+const SettingOptionsMarathi = [
+  {
+    id:1,
+    title:"खाते सेटिंग्स",
+    routeTo:"AccountScreen"
+  },
+  {
+      id:1,
+      title:"भाषा सेटिंग्स",
+      routeTo:"SelectLanguage"
+    },  {
+      id:1,
+      title:"प्लेबॅक सेटिंग्स",
+      routeTo:""
+    },  {
+      id:1,
+      title:"नियमे आणि अटी",
+      routeTo:""
+    },  {
+      id:1,
+      title:"खाते तपशील",
+      routeTo:""
+    },  {
+      id:1,
+      title:"आम्हाला संपर्क साधा",
+      routeTo:""
+    },
+]
 const Languages = [
   {
     id:1,
@@ -79,4 +166,4 @@ const Languages = [
   }
 ]
 
-export {ChapterListData,SettingOptions,Languages}
+export {ChapterListData,SettingOptions,Languages,SettingOptionsHindi,SettingOptionsGujrati,SettingOptionsMarathi}

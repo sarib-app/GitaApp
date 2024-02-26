@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
@@ -6,12 +6,66 @@ import { FlatList } from 'react-native-gesture-handler';
 import { ChapterListData, Languages } from '../../Global/Data/Data';
 import HomeStyles from '../Home/HomeStyles';
 import Language from './Language';
+import checkLogin from '../Auth/checkLogin';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../config/firebase';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
+import { useIsFocused } from '@react-navigation/native';
 const SelectLanguage = () => {
+  const navigation = useNavigation()
 const [SelectLang,setSelectLang] = useState("English")
+
+const [Lang,setLang]=useState(Eng)
+
+
+const focused= useIsFocused()
+  useEffect(()=>{
+async function GetLangLocal(){
+  const selection = await AsyncStorage.getItem("selectedLang")
+  if(selection){
+    setSelectLang(selection)
+    if(selection === "English"){
+      setLang(Eng)
+    }
+    else if(selection === "Hindi"){
+setLang(Hindi)
+    }
+    else if(selection === "Gujrati"){
+setLang(Gujrati)
+    }
+    else{
+setLang(Marathi)
+    }
+  }
+}
+GetLangLocal()
+
+  },[focused,SelectLang])
+async function SetTheLanguage(){
+
+  await AsyncStorage.setItem("selectedLang",SelectLang)
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      navigation.navigate('BottomNavigation')
+
+    } else {
+navigation.navigate('Login')
+    }
+  });
+}
+
+async function onLangSeclection (lang){
+  setSelectLang(lang)
+  await AsyncStorage.setItem("selectedLang",lang)
+
+}
+
 function LanguageList({item}){
     return(
 <TouchableOpacity
-onPress={()=> setSelectLang(item.title)}
+onPress={()=> onLangSeclection(item.title)}
 
 style={[Language.button,{backgroundColor:item.title === SelectLang ? Colors.lightTxtClr:Colors.PrimaryColor}]}>
 <Text style={Language.buttonText}>
@@ -26,7 +80,7 @@ style={[Language.button,{backgroundColor:item.title === SelectLang ? Colors.ligh
       {/* Title */}
     <View style={HomeStyles.container}>
 
-      <Text style={[HomeStyles.title,{marginTop:20}]}>Select Language</Text>
+      <Text style={[HomeStyles.title,{marginTop:20}]}>{Lang.LanguageScreenTxt.Title}</Text>
 
     </View>
     
@@ -38,7 +92,14 @@ style={[Language.button,{backgroundColor:item.title === SelectLang ? Colors.ligh
         )
     }}
     />
+<TouchableOpacity
+onPress={()=> SetTheLanguage()}
 
+style={[Language.button]}>
+<Text style={Language.buttonText}>
+    {Lang.LanguageScreenTxt.BtnText}
+</Text>
+</TouchableOpacity>
 
     </View>
   );

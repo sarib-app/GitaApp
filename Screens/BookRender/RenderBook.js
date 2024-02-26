@@ -11,7 +11,11 @@ import AuthStyles from '../Auth/AuthStyles';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
-const Settings = () => {
+import { BookHindi } from '../../Global/Data/Book';
+const RenderBook = ({route}) => {
+    const { item } = route.params;
+    const id=item.id
+
   const [Lang,setLang]=useState(Eng)
   const [listData,setListData]=useState(SettingOptions)
 
@@ -45,20 +49,37 @@ GetLangLocal()
 
   },[focused])
   
+  const Data = BookHindi.find((item) => item.id === id);
 
+//   console.log(Data.verses)
 const navigation= useNavigation()
-    function ChapterList({item}){
+    function ChapterContent({item}){
         return(
             // <View style={HomeStyles.chapterContainer}>
          
-              <TouchableOpacity 
-              onPress={()=> navigation.navigate(item.routeTo)}
-              style={HomeStyles.SettingsCards}>
-              <View style={[HomeStyles.SettingsCards,ContainerChapExt]}>
-                <Text style={{marginTop:20,marginLeft:20,color:'white'}}>{item.title}</Text>
-                <Text style={HomeStyles.chapterDescription}>{item.Description}</Text>
+              <View 
+             
+              style={{backgroundColor:Colors.SecondaryDark,padding:20,borderRadius:20,marginBottom:20}}>
+                <Text style={{fontSize:20,color:Colors.lightTxtClr,fontWeight:'bold',marginBottom:10}}>
+                    <Text style={{color:Colors.PrimaryColor}}>
+                    Verse {item.verse_number}:  
+                        </Text>
+                    {" "+item.text.original}
+                </Text>
+                <Text style={{fontSize:20,color:Colors.lightTxtClr,fontWeight:'bold',marginBottom:10}}>
+                    <Text style={{color:Colors.PrimaryColor}}>
+                    Meaning:  
+                        </Text>
+                    {" "+item.text.translation}
+                </Text>
+
+                <Text style={{fontSize:20,color:Colors.lightTxtClr,fontWeight:'bold',marginBottom:10}}>
+                    <Text style={{color:Colors.PrimaryColor}}>
+                    Details:  
+                        </Text>
+                    {" "+item.commentary}
+                </Text>
               </View>
-              </TouchableOpacity>
       
         )
     }
@@ -68,27 +89,24 @@ const navigation= useNavigation()
       {/* Title */}
     <View style={HomeStyles.container}>
 
-      <Text style={HomeStyles.title}>Settings</Text>
+      <Text style={[HomeStyles.title,{marginBottom:5,fontSize:27}]}>Chapter {item.id}</Text>
+      <Text style={[HomeStyles.title,{fontSize:17,color:Colors.PrimaryColor}]}>{item.chapter}</Text>
+
 
  
       {/* List of Chapters */}
       {/* You can map over your chapters data and render each chapter */}
       <FlatList
-      data={listData}
+      data={Data.verses}
       renderItem={({item})=>{
         return(
-            <ChapterList item={item} />
+            <ChapterContent item={item} />
         )
       }
     }
       />
-      <TouchableOpacity
-onPress={()=>navigation.navigate("Login")}
-style={[AuthStyles.button,{marginTop:20}]}>
-<Text style={AuthStyles.buttonText}>
-    {Lang.SettingScreenTxt.Button1Txt}
-</Text>
-</TouchableOpacity>
+   
+
 
     </View>
 
@@ -97,5 +115,5 @@ style={[AuthStyles.button,{marginTop:20}]}>
 };
 
 
-export default Settings;
+export default RenderBook;
 const ContainerChapExt ={backgroundColor:Colors.SecondaryDark,marginTop:-2,marginLeft:-2,   justifyContents:'center'}

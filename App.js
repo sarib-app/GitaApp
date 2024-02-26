@@ -8,12 +8,14 @@ import AccountScreen from './Screens/Accounts/Accounts';
 import SelectLanguage from './Screens/Language/SelectLanguage';
 import SubscribeNow from './Screens/Subscription/SubscribeNow';
 import PayNow from './Screens/Subscription/PayNow';
+import UpdatePasswordScreen from './Screens/Auth/UpdatePassword';
+import RenderBook from './Screens/BookRender/RenderBook';
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="SelectLanguage">
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="BottomNavigation" component={BottomNavigation} options={{ headerShown: false }} />
@@ -21,6 +23,8 @@ const App = () => {
         <Stack.Screen name="SelectLanguage" component={SelectLanguage} options={{ headerShown: false }} />
         <Stack.Screen name="SubscribeNow" component={SubscribeNow} options={{ headerShown: false }} />
         <Stack.Screen name="PayNow" component={PayNow} options={{ headerShown: false }} />
+        <Stack.Screen name="UpdatePasswordScreen" component={UpdatePasswordScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="RenderBook" component={RenderBook} options={{ headerShown: false }} />
 
 
       </Stack.Navigator>
