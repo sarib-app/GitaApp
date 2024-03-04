@@ -10,12 +10,13 @@ import SubscribeNow from './Screens/Subscription/SubscribeNow';
 import PayNow from './Screens/Subscription/PayNow';
 import UpdatePasswordScreen from './Screens/Auth/UpdatePassword';
 import RenderBook from './Screens/BookRender/RenderBook';
+import GoogleSignInButton from './Screens/Auth/GoogleLogin';
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SelectLanguage">
+      <Stack.Navigator initialRouteName="GoogleSignInButton">
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="BottomNavigation" component={BottomNavigation} options={{ headerShown: false }} />
@@ -25,6 +26,7 @@ const App = () => {
         <Stack.Screen name="PayNow" component={PayNow} options={{ headerShown: false }} />
         <Stack.Screen name="UpdatePasswordScreen" component={UpdatePasswordScreen} options={{ headerShown: false }} />
         <Stack.Screen name="RenderBook" component={RenderBook} options={{ headerShown: false }} />
+        <Stack.Screen name="GoogleSignInButton" component={GoogleSignInButton} options={{ headerShown: false }} />
 
 
       </Stack.Navigator>
