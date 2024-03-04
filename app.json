@@ -5,7 +5,6 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": "git-app",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -28,6 +27,13 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b2ffcc27-de84-40bf-8f40-7d013c8bf453"
+      }
+    },
+    "scheme": "com.app.gitapp"
+
   }
 }

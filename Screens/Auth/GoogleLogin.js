@@ -12,21 +12,22 @@ export default function GoogleSignInButton() {
   const [message, setMessage] = React.useState();
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    // androidClientId: "694235095257-fkbf1u81sm5ii76om74j5b7h8u4v2m7a.apps.googleusercontent.com",
-    // iosClientId: "694235095257-qnub27n3o6s0e3lo1sneio03o6ka5k9m.apps.googleusercontent.com",
-    expoClientId: "482400597606-j3ppuj3um1vcu8eson6jrg5b4bsnfnvo.apps.googleusercontent.com"
+    androidClientId: "994031876407-mjkoqjg3h8t2pkcsojuboqldgeneu8l8.apps.googleusercontent.com",
+    iosClientId: "994031876407-u70m1ikmfsg3p1o23lmml63bac8p0sc0.apps.googleusercontent.com",
+    expoClientId: "994031876407-co912b9906jae1lkfmss2ku58kniggs8.apps.googleusercontent.com"
   });
 
   React.useEffect(() => {
     setMessage(JSON.stringify(response));
     if (response?.type === "success") {
       setAccessToken(response.authentication.accessToken);
+       getUserData(response.authentication.accessToken)
     }
   }, [response]);
 
-  async function getUserData() {
+  async function getUserData(token) {
     let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-      headers: { Authorization: `Bearer ${accessToken}`}
+      headers: { Authorization: `Bearer ${token}`}
     });
 
     userInfoResponse.json().then(data => {
@@ -49,11 +50,12 @@ export default function GoogleSignInButton() {
   return (
     <View style={styles.container}>
       {showUserInfo()}
+      <Text style={{justifyContent:'center',fontSize:20}}>dasdsa</Text>
       <Button 
         title={accessToken ? "Get User Data" : "Login"}
-        onPress={accessToken ? getUserData : () => { promptAsync({useProxy: false, showInRecents: true}) }}
+        onPress={accessToken ? getUserData : () => { promptAsync({showInRevents: true}) }}
       />
-      <StatusBar style="auto" />
+      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }
