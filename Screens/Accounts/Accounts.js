@@ -54,6 +54,8 @@ useEffect(()=>{
 async function GetData(){
 
   const getPassword = await AsyncStorage.getItem("password")
+  
+console.log(getPassword)
   setOldPassword(getPassword)
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -108,7 +110,7 @@ async function GetData(){
        
        <TextInput 
        onChangeText={(e)=> setEmail(e)}
-       onEndEditing={()=>{
+       onEndEditing={()=>{ oldPassword != "null" &&
         updateEmaill(email,oldPassword)
        }}
        style={AccountStyle.chapterTitle}>{user?.email}</TextInput>
@@ -117,15 +119,25 @@ async function GetData(){
      </View>
 
 
-     <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.PasswordTitle}</Text>
 
-<TouchableOpacity
+
+{
+  oldPassword != "null" &&
+
+  <>
+     <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.PasswordTitle}</Text>
+  
+  <TouchableOpacity
 onPress={()=> navigation.navigate("UpdatePasswordScreen")}
 style={[AccountStyle.chapterInfo,{height:50}]}>
        
        <Text style={AccountStyle.chapterTitle}>{"Reset Password"}</Text>
     
      </TouchableOpacity>
+  </>
+
+}
+
 
      <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.PaymentTitle}</Text>
 

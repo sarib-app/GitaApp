@@ -8,12 +8,18 @@ import LogoImg from '../../assets/Imgs/LogoImg.png'
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { auth } from '../../Components/Config/firebase'; // Adjust the path as needed
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithCredential, signInWithEmailAndPassword,OAuthProvider,GoogleAuthProvider} from 'firebase/auth';
+import * as AppleAuthentication from 'expo-apple-authentication';
+
 
 // const auth = getAuth()
 import { auth } from '../../config/firebase';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
+import * as Google from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
+
+WebBrowser.maybeCompleteAuthSession();
 const LoginScreen = () => {
 const navigation = useNavigation()
 
@@ -27,6 +33,18 @@ const [Email, setEmail] = useState('');
 
 
   const focused= useIsFocused()
+
+  const [accessToken, setAccessToken] = React.useState();
+  const [userInfo, setUserInfo] = React.useState();
+  const [message, setMessage] = React.useState(); 
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId: "994031876407-mjkoqjg3h8t2pkcsojuboqldgeneu8l8.apps.googleusercontent.com",
+    iosClientId: "994031876407-u70m1ikmfsg3p1o23lmml63bac8p0sc0.apps.googleusercontent.com",
+    expoClientId: "994031876407-co912b9906jae1lkfmss2ku58kniggs8.apps.googleusercontent.com"
+  });
+
+
+
   useEffect(()=>{
 async function GetLangLocal(){
   const selection = await AsyncStorage.getItem("selectedLang")
@@ -69,6 +87,118 @@ GetLangLocal()
       // Add your login logic here
     };
 
+    React.useEffect(() => {
+      setMessage(JSON.stringify(response));
+      if (response?.type === "success") {
+        setAccessToken(response.authentication.accessToken);
+        LoginGoogleFirebase(response.authentication.accessToken)
+      }
+    }, [response]);
+  
+    async function getUserData(token) {
+      let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+        headers: { Authorization: `Bearer ${token}`}
+      });
+  
+      userInfoResponse.json().then(data => {
+        setUserInfo(data);
+      });
+    }
+
+
+
+
+async function loginWithApple(){
+  try {
+    const credential = await AppleAuthentication.signInAsync({
+      requestedScopes: [
+        AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+        AppleAuthentication.AppleAuthenticationScope.EMAIL,
+      ],
+    });
+    console.log(credential.identityToken)
+    LoginFirebaseApple(credential.identityToken)
+    // signed in
+  } catch (e) {
+    if (e.code === 'ERR_REQUEST_CANCELED') {
+      // handle that the user canceled the sign-in flow
+    } else {
+      // handle other errors
+    }
+  }
+}
+
+function generateRawNonce(length) {
+  const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+  let rawNonce = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    rawNonce += charset[randomIndex];
+  }
+  return rawNonce;
+}
+
+async function LoginFirebaseApple(token){
+  const rawNonce = generateRawNonce(32); // Generate a raw nonce with a length of 32 characters
+
+  try {
+    const provider = new OAuthProvider('apple.com');
+// const rawNonce = gen
+    const credential = provider.credential({
+      idToken:token,
+      rawNonce: rawNonce, // Include the raw nonce
+    });
+    console.log("token",token,"credetianls",credential)
+
+    const userCredential = await signInWithCredential(auth, credential);
+    const user = userCredential.user;
+    await AsyncStorage.setItem("user", JSON.stringify(user));
+    await AsyncStorage.setItem("identifier", "apple");
+
+    await AsyncStorage.setItem("password","null")
+    NavigatorHandler()
+    setLoading(false)
+
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(errorCode, errorMessage);
+    // Alert.alert("Error",errorMessage)
+    // setLoading(false)
+
+    // Handle errors here
+  }
+}
+
+
+
+async function LoginGoogleFirebase(token){
+
+  try {
+    const googleCredential = GoogleAuthProvider.credential(null, accessToken);
+
+
+    const userCredential = await signInWithCredential(auth, googleCredential);
+    const user = userCredential.user;
+    await AsyncStorage.setItem("user", JSON.stringify(user));
+    await AsyncStorage.setItem("identifier", "null");
+
+    await AsyncStorage.setItem("password",password)
+    NavigatorHandler()
+    setLoading(false)
+
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(errorCode, errorMessage);
+    // Alert.alert("Error",errorMessage)
+    // setLoading(false)
+
+    // Handle errors here
+  }
+}
+
+
 
     async function loginFirebase(){
       
@@ -76,8 +206,12 @@ GetLangLocal()
         const userCredential = await signInWithEmailAndPassword(auth, Email, password);
         const user = userCredential.user;
         await AsyncStorage.setItem("user", JSON.stringify(user));
+        
         await AsyncStorage.setItem("password",password)
-        navigation.navigate("BottomNavigation");
+        NavigatorHandler()
+
+        await AsyncStorage.setItem("identifier", "firebase");
+
         setLoading(false)
 
       } catch (error) {
@@ -89,6 +223,18 @@ GetLangLocal()
 
         // Handle errors here
       }
+    }
+
+
+    function NavigatorHandler(){
+      navigation.navigate("BottomNavigation");
+
+      // Reset the navigation stack to only contain the BottomNavigation screen
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'BottomNavigation' }],
+      });
+  
     }
   
   return (
@@ -142,11 +288,21 @@ GetLangLocal()
 
     {/* Login with Gmail Button */}
     <TouchableOpacity
-
+     onPress={accessToken ? getUserData : () => { promptAsync({showInRecents: true}) }}
     style={[AuthStyles.button, { backgroundColor: Colors.SecondaryDark }]}>
       <AntDesign name="google" size={24} color="white" />
       <Text style={[AuthStyles.buttonText, { color: 'white' }]}>{Lang.LoginTScreenxt.Button2Txt}</Text>
     </TouchableOpacity>
+
+
+
+    <AppleAuthentication.AppleAuthenticationButton
+        buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+        buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+        cornerRadius={5}
+        style={AuthStyles.button}
+        onPress={ () => loginWithApple()}
+      />
 
     {/* Forgot Password and Sign Up */}
     <View style={AuthStyles.footer}>
