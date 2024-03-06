@@ -11,6 +11,9 @@ import PayNow from './Screens/Subscription/PayNow';
 import UpdatePasswordScreen from './Screens/Auth/UpdatePassword';
 import RenderBook from './Screens/BookRender/RenderBook';
 import GoogleSignInButton from './Screens/Auth/GoogleLogin';
+import TermsConditionsScreen from './Screens/AppContent/Terms&Conditions';
+import PrivacyPolicyScreen from './Screens/AppContent/PrivacyPolicy';
+import AboutUsScreen from './Screens/AppContent/AboutUs';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -27,6 +30,9 @@ const App = () => {
         <Stack.Screen name="UpdatePasswordScreen" component={UpdatePasswordScreen} options={{ headerShown: false }} />
         <Stack.Screen name="RenderBook" component={RenderBook} options={{ headerShown: false }} />
         <Stack.Screen name="GoogleSignInButton" component={GoogleSignInButton} options={{ headerShown: false }} />
+        <Stack.Screen name="AboutUsScreen" component={AboutUsScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="TermsConditionsScreen" component={TermsConditionsScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="PrivacyPolicyScreen" component={PrivacyPolicyScreen} options={{ headerShown: false }} />
 
 
       </Stack.Navigator>

@@ -18,7 +18,6 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.app.gitapp",
       "usesAppleSignIn": true
-
     },
     "android": {
       "adaptiveIcon": {
@@ -32,10 +31,10 @@
     },
     "extra": {
       "eas": {
-        "projectId": "b2ffcc27-de84-40bf-8f40-7d013c8bf453"
+        "projectId": "7bd81753-6653-44b2-8d9c-277a5aa53cdb"
       }
     },
-    "scheme": "com.app.gitapp"
-
+    "scheme": "com.app.gitapp",
+    "owner": "karanvani"
   }
 }

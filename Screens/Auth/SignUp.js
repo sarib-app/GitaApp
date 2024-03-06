@@ -82,6 +82,10 @@ GetLangLocal()
         await AsyncStorage.setItem("user", JSON.stringify(user));
         await AsyncStorage.setItem("password", password);
         navigation.navigate("BottomNavigation");
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'BottomNavigation' }],
+        });
         setLoading(false);
       } catch (error) {
         const errorCode = error.code;

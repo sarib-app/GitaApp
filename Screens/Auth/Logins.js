@@ -38,9 +38,9 @@ const [Email, setEmail] = useState('');
   const [userInfo, setUserInfo] = React.useState();
   const [message, setMessage] = React.useState(); 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: "994031876407-mjkoqjg3h8t2pkcsojuboqldgeneu8l8.apps.googleusercontent.com",
-    iosClientId: "994031876407-u70m1ikmfsg3p1o23lmml63bac8p0sc0.apps.googleusercontent.com",
-    expoClientId: "994031876407-co912b9906jae1lkfmss2ku58kniggs8.apps.googleusercontent.com"
+    androidClientId: "420870778500-ibesf7i06pgu82j7tp5rjqrtu2h66ioo.apps.googleusercontent.com",
+    iosClientId: "420870778500-bjdvpr3127ve30dhi0bsloib2g1d7da8.apps.googleusercontent.com",
+    expoClientId: "420870778500-den8oc1mtl2es0opq4tu4v1n6ohi29t7.apps.googleusercontent.com"
   });
 
 

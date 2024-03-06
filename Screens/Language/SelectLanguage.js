@@ -18,8 +18,6 @@ const SelectLanguage = () => {
 const [SelectLang,setSelectLang] = useState("English")
 
 const [Lang,setLang]=useState(Eng)
-
-
 const focused= useIsFocused()
   useEffect(()=>{
 async function GetLangLocal(){
@@ -45,15 +43,16 @@ GetLangLocal()
   },[focused,SelectLang])
 async function SetTheLanguage(){
 
-  await AsyncStorage.setItem("selectedLang",SelectLang)
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      navigation.navigate('BottomNavigation')
-
+   await AsyncStorage.setItem("selectedLang",SelectLang)
+    const getUser = AsyncStorage.getItem("user")
+    if (getUser) {
+    navigation.navigate('BottomNavigation')
     } else {
-navigation.navigate('Login')
+    navigation.navigate('Login')
     }
-  });
+    // onAuthStateChanged(auth, (user) => {
+    // });
+
 }
 
 async function onLangSeclection (lang){

@@ -1,4 +1,4 @@
-const ChapterListData = [
+const ChapterListData = [   
     {
      Id:1,
      Title:"Title of chapter 1",
@@ -48,15 +48,20 @@ const SettingOptions = [
       },  {
         id:1,
         title:"Terms & Conditions",
-        routeTo:""
+        routeTo:"TermsConditionsScreen"
       },  {
         id:1,
-        title:"Account Details",
-        routeTo:""
+        title:"Privacy Policy",
+        routeTo:"PrivacyPolicyScreen"
       },  {
         id:1,
         title:"Contact Us",
         routeTo:""
+      },
+      {
+        id:1,
+        title:"About Us",
+        routeTo:"AboutUsScreen"
       },
 ]
 const SettingOptionsHindi = [
@@ -73,19 +78,26 @@ const SettingOptionsHindi = [
       id:1,
       title:"प्लेबैक सेटिंग्स",
       routeTo:""
-    },  {
-      id:1,
-      title:"नियम और शर्तें",
-      routeTo:""
-    },  {
-      id:1,
-      title:"खाता विवरण",
-      routeTo:""
-    },  {
-      id:1,
-      title:"हमसे संपर्क करें",
-      routeTo:""
+    },    {
+      id: 1,
+      title: "नियम और शर्तें",
+      routeTo: "TermsConditionsScreen"
     },
+    {
+      id: 1,
+      title: "गोपनीयता नीति",
+      routeTo: "PrivacyPolicyScreen"
+    },
+    {
+      id: 1,
+      title: "संपर्क करें",
+      routeTo: ""
+    },
+    {
+      id: 1,
+      title: "हमारे बारे में",
+      routeTo: "AboutUsScreen"
+    }
 ]
 
 
@@ -99,23 +111,26 @@ const SettingOptionsGujrati = [
       id:1,
       title:"ભાષા સેટિંગ્સ",
       routeTo:"SelectLanguage"
-    },  {
-      id:1,
-      title:"પ્લેબેક સેટિંગ્સ",
-      routeTo:""
-    },  {
-      id:1,
-      title:"નિયમો અને શરતો",
-      routeTo:""
-    },  {
-      id:1,
-      title:"ખાતા વિગતો",
-      routeTo:""
-    },  {
-      id:1,
-      title:"અમારા સાથે સંપર્ક કરો",
-      routeTo:""
+    },    {
+      id: 1,
+      title: "શરતો અને નિયમો",
+      routeTo: "TermsConditionsScreen"
     },
+    {
+      id: 1,
+      title: "ગોપનીયતા નીતિ",
+      routeTo: "PrivacyPolicyScreen"
+    },
+    {
+      id: 1,
+      title: "સંપર્ક કરો",
+      routeTo: ""
+    },
+    {
+      id: 1,
+      title: "અમારા વિશે",
+      routeTo: "AboutUsScreen"
+    }
 ]
 
 
@@ -133,19 +148,26 @@ const SettingOptionsMarathi = [
       id:1,
       title:"प्लेबॅक सेटिंग्स",
       routeTo:""
-    },  {
-      id:1,
-      title:"नियमे आणि अटी",
-      routeTo:""
-    },  {
-      id:1,
-      title:"खाते तपशील",
-      routeTo:""
-    },  {
-      id:1,
-      title:"आम्हाला संपर्क साधा",
-      routeTo:""
+    }, {
+      id: 1,
+      title: "नियम आणि अटी",
+      routeTo: "TermsConditionsScreen"
     },
+    {
+      id: 1,
+      title: "गोपनीयता धोरण",
+      routeTo: "PrivacyPolicyScreen"
+    },
+    {
+      id: 1,
+      title: "संपर्क साधा",
+      routeTo: ""
+    },
+    {
+      id: 1,
+      title: "आमच्याबद्दल",
+      routeTo: "AboutUsScreen"
+    }
 ]
 const Languages = [
   {
