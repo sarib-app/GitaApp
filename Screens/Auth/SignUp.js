@@ -85,7 +85,7 @@ GetLangLocal()
         navigation.reset({
           index: 0,
           routes: [{ name: 'BottomNavigation' }],
-        });
+        }); 
         setLoading(false);
       } catch (error) {
         const errorCode = error.code;

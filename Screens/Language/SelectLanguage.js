@@ -82,7 +82,8 @@ style={[Language.button,{backgroundColor:item.title === SelectLang ? Colors.ligh
       <Text style={[HomeStyles.title,{marginTop:20}]}>{Lang.LanguageScreenTxt.Title}</Text>
 
     </View>
-    
+    <View style={{height:'50%'}}>
+
     <FlatList
     data={Languages}
     renderItem={({item})=>{
@@ -91,10 +92,12 @@ style={[Language.button,{backgroundColor:item.title === SelectLang ? Colors.ligh
         )
     }}
     />
+    </View>
+
 <TouchableOpacity
 onPress={()=> SetTheLanguage()}
 
-style={[Language.button]}>
+style={[Language.button,{position:'absolute',bottom:100}]}>
 <Text style={Language.buttonText}>
     {Lang.LanguageScreenTxt.BtnText}
 </Text>

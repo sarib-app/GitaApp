@@ -1,5 +1,6 @@
 import { View, TextInput, StyleSheet, TouchableOpacity, Text, Dimensions } from 'react-native';
 import { Colors } from '../../Global/Styling/Branding';
+
 const WindowWidth = Dimensions.get('window').width
 const WindowHeight = Dimensions.get('screen').height;
 
@@ -50,7 +51,7 @@ const HomeStyles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         //   backgroundColor:"pink",
-        marginBottom: 10,
+        marginTop: 10,
     },
     ChapterSrialContainr: {
         width: 55,

@@ -175,7 +175,7 @@ async function LoginFirebaseApple(token){
 async function LoginGoogleFirebase(token){
 
   try {
-    const googleCredential = GoogleAuthProvider.credential(null, accessToken);
+    const googleCredential = GoogleAuthProvider.credential(null, token);
 
 
     const userCredential = await signInWithCredential(auth, googleCredential);

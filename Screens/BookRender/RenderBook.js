@@ -11,55 +11,97 @@ import AuthStyles from '../Auth/AuthStyles';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
-import { BookHindi } from '../../Global/Data/Book';
+// import { BookHindi } from '../../Global/Data/Book';
+import BookGujrati from '../../Global/Data/BookGujarati';
+import { BookEnglish } from '../../Global/Data/BookEnglish';
+import { BookHindi } from '../../Global/Data/BookHindi';
+import { Entypo } from '@expo/vector-icons';
+import addToFavorites from './addToFav';
+import removeFromFavorites from './RemoveFav';
+import fetchFavorites from './fetchFav';
 const RenderBook = ({route}) => {
     const { item } = route.params;
+    const { selected } = route.params;
+    const [bookData,setBookData]=useState(BookEnglish)
+
     const id=item.id
+    const Title = item.Title
+    const focused= useIsFocused()
+    const navigation= useNavigation()
+    const [favs,setFavs]=useState([])
+    useEffect(()=>{
+  async function GetLangLocal(){
+    const selection = await AsyncStorage.getItem("selectedLang")
+    if(selection){
+      if(selection === "English"){
+        setBookData(BookEnglish)
+      }
+      else if(selection === "Hindi"){
+        setBookData(BookHindi)
 
-  const [Lang,setLang]=useState(Eng)
-  const [listData,setListData]=useState(SettingOptions)
 
-  const focused= useIsFocused()
-  useEffect(()=>{
-async function GetLangLocal(){
-  const selection = await AsyncStorage.getItem("selectedLang")
-  if(selection){
-    if(selection === "English"){
-      setLang(Eng)
-      setListData(SettingOptions)
-    }
-    else if(selection === "Hindi"){
-setLang(Hindi)
-setListData(SettingOptionsHindi)
+      }
+      else if(selection === "Gujrati"){
+        setBookData(BookGujrati)
 
-    }
-    else if(selection === "Gujrati"){
-setLang(Gujrati)
-setListData(SettingOptionsGujrati)
 
-    }
-    else{
-setLang(Marathi)
-setListData(SettingOptionsMarathi)
+      }
+      else{
 
+        setBookData(BookEnglish)
+
+
+      }
     }
   }
-}
-GetLangLocal()
+  GetLangLocal()
 
-  },[focused])
+    },[focused])
+ 
+    useEffect(()=>{
+    const fetchFavCall = async ()=>{
+
+      const favResult = await  fetchFavorites(id)
+      console.log(favResult)
+      setFavs(favResult)
+    }
+    fetchFavCall()
+    },[])
+      
+const Data = bookData.find((item) => item.id === id);
+const filteredFavData = Data.verses.filter(verse => favs.includes(verse.verse_number));
+
+    
+function ChapterContent({item}){
+
+  const [added,setAdded]=useState(favs.includes(item.verse_number)?true:false)
+  async function onAdd(){
+    if(added === false){
+      const result = await addToFavorites(id,Title,item)
+      if(result === "success"){
+        setAdded(true)
+      }
+    }
+    else{
+      const result = await removeFromFavorites(id,item.verse_number)
+      if(result === "success"){
+        setAdded(false)
+      }
+    }
   
-  const Data = BookHindi.find((item) => item.id === id);
-
-//   console.log(Data.verses)
-const navigation= useNavigation()
-    function ChapterContent({item}){
+  }
+  
         return(
             // <View style={HomeStyles.chapterContainer}>
          
               <View 
              
               style={{backgroundColor:Colors.SecondaryDark,padding:20,borderRadius:20,marginBottom:20}}>
+              
+              <TouchableOpacity onPress={()=> onAdd()} style={{alignSelf:'flex-end'}}>
+                <Entypo  name="heart" size={24} color={added === true ? "red":"white"} />
+
+              </TouchableOpacity>
                 <Text style={{fontSize:20,color:Colors.lightTxtClr,fontWeight:'bold',marginBottom:10}}>
                     <Text style={{color:Colors.PrimaryColor}}>
                     Verse {item.verse_number}:  
@@ -82,7 +124,7 @@ const navigation= useNavigation()
               </View>
       
         )
-    }
+}
 
   return (
     <View style={GlobalStyles.container}>
@@ -97,7 +139,7 @@ const navigation= useNavigation()
       {/* List of Chapters */}
       {/* You can map over your chapters data and render each chapter */}
       <FlatList
-      data={Data.verses}
+      data={selected === "All"?Data.verses:filteredFavData}
       renderItem={({item})=>{
         return(
             <ChapterContent item={item} />

@@ -1,4 +1,4 @@
-const BookHindi = [
+const BookMarathi = [
     {
         "id":1,
               "Title":"Chapter 1",
@@ -116,4 +116,4 @@ const BookHindi = [
       }
 ]
 
-export {BookHindi}
+export {BookMarathi}

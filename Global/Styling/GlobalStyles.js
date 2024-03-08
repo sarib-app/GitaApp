@@ -1,6 +1,6 @@
 import { View, TextInput, StyleSheet, TouchableOpacity, Text,Dimensions} from 'react-native';
 const WindowWidth = Dimensions.get('window').width
-const WindowHeight = Dimensions.get('screen').height; 
+const WindowHeight = Dimensions.get('window').height; 
 import { Colors } from '../../Global/Styling/Branding';
 const GlobalStyles = StyleSheet.create({
     container: {

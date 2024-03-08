@@ -13,6 +13,7 @@ import { auth } from '../../config/firebase';
 import updateEmaill from '../../Components/GlobalCalls/UpdateEmail';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
+
 const AccountScreen = () => {
 const navigation = useNavigation()
 const [user,setUser]=useState(null)
