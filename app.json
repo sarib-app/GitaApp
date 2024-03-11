@@ -3,7 +3,7 @@
     "name": "git-app",
     "slug": "git-app",
     "version": "1.0.1",
-    "orientation": "portrait",
+    "orientation": "portrait", 
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
