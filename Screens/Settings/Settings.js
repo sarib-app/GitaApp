@@ -1,23 +1,24 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList } from 'react-native';
 import HomeStyles from '../Home/HomeStyles';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
-import { FlatList } from 'react-native-gesture-handler';
+// import { FlatList } from 'react-native-gesture-handler';
 import { ChapterListData, SettingOptions,SettingOptionsHindi,SettingOptionsGujrati,SettingOptionsMarathi } from '../../Global/Data/Data';
 import { useNavigation } from '@react-navigation/native';
 import AuthStyles from '../Auth/AuthStyles';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
+import * as Linking from 'expo-linking';
 const Settings = () => {
   const [Lang,setLang]=useState(Eng)
   const [listData,setListData]=useState(SettingOptions)
 
   const focused= useIsFocused()
   useEffect(()=>{
-async function GetLangLocal(){
+  async function GetLangLocal(){
   const selection = await AsyncStorage.getItem("selectedLang")
   if(selection){
     if(selection === "English"){
@@ -25,8 +26,8 @@ async function GetLangLocal(){
       setListData(SettingOptions)
     }
     else if(selection === "Hindi"){
-setLang(Hindi)
-setListData(SettingOptionsHindi)
+   setLang(Hindi)
+   setListData(SettingOptionsHindi)
 
     }
     else if(selection === "Gujrati"){
@@ -44,6 +45,11 @@ setListData(SettingOptionsMarathi)
 GetLangLocal()
 
   },[focused])
+
+  function ContactLinker(){
+    Linking.openURL('https://bhagavadgita-app.com/contactus');
+
+  }
   
 
 const navigation= useNavigation()
@@ -52,7 +58,17 @@ const navigation= useNavigation()
             // <View style={HomeStyles.chapterContainer}>
          
               <TouchableOpacity 
-              onPress={()=> navigation.navigate(item.routeTo)}
+              onPress={()=> {
+                if(item.routeTo != "contactUs"){
+
+                  navigation.navigate(item.routeTo)
+                }
+                else{
+                  ContactLinker()
+                }
+                
+                }
+                }
               style={HomeStyles.SettingsCards}>
               <View style={[HomeStyles.SettingsCards,ContainerChapExt]}>
                 <Text style={{marginTop:20,marginLeft:20,color:'white'}}>{item.title}</Text>

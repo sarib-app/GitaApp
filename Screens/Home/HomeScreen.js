@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList } from 'react-native';
 import HomeStyles from './HomeStyles';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
-import { FlatList } from 'react-native-gesture-handler';
+// import { FlatList } from 'react-native-gesture-handler';
 import { ChapterListData } from '../../Global/Data/Data';
 import { Eng, Gujrati,Hindi, Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';

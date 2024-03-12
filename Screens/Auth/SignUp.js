@@ -74,10 +74,9 @@ GetLangLocal()
 
     async function SignItUp() {
       setLoading(true);
-    
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password, displayName);
-        const user = userCredential.user;lkju0n,gpmtvndrtmyg  qwedrftgyhjkl;''
+        const user = userCredential.user;
         console.log(user.uid);
         await AsyncStorage.setItem("user", JSON.stringify(user));
         await AsyncStorage.setItem("password", password);

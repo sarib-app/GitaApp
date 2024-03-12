@@ -41,11 +41,15 @@ const SettingOptions = [
         id:1,
         title:"Language Settings",
         routeTo:"SelectLanguage"
-      },  {
-        id:1,
-        title:"Playback Settings",
-        routeTo:""
-      },  {
+      },
+      
+      // {
+      //   id:1,
+      //   title:"Playback Settings",
+      //   routeTo:""
+      // },  
+      
+      {
         id:1,
         title:"Terms & Conditions",
         routeTo:"TermsConditionsScreen"
@@ -56,7 +60,7 @@ const SettingOptions = [
       },  {
         id:1,
         title:"Contact Us",
-        routeTo:""
+        routeTo:"contactUs"
       },
       {
         id:1,
@@ -74,11 +78,15 @@ const SettingOptionsHindi = [
       id:1,
       title:"भाषा सेटिंग्स",
       routeTo:"SelectLanguage"
-    },  {
-      id:1,
-      title:"प्लेबैक सेटिंग्स",
-      routeTo:""
-    },    {
+    }, 
+    
+    // {
+    //   id:1,
+    //   title:"प्लेबैक सेटिंग्स",
+    //   routeTo:""
+    // },   
+    
+    {
       id: 1,
       title: "नियम और शर्तें",
       routeTo: "TermsConditionsScreen"
@@ -91,7 +99,7 @@ const SettingOptionsHindi = [
     {
       id: 1,
       title: "संपर्क करें",
-      routeTo: ""
+      routeTo: "contactUs"
     },
     {
       id: 1,
@@ -111,7 +119,9 @@ const SettingOptionsGujrati = [
       id:1,
       title:"ભાષા સેટિંગ્સ",
       routeTo:"SelectLanguage"
-    },    {
+    },  
+    
+    {
       id: 1,
       title: "શરતો અને નિયમો",
       routeTo: "TermsConditionsScreen"
@@ -124,7 +134,7 @@ const SettingOptionsGujrati = [
     {
       id: 1,
       title: "સંપર્ક કરો",
-      routeTo: ""
+      routeTo: "contactUs"
     },
     {
       id: 1,
@@ -182,10 +192,10 @@ const Languages = [
     id:3,
     title:"Gujrati",
   },
-  {
-    id:4,
-    title:"Marathi",
-  }
+  // {
+  //   id:4,
+  //   title:"Marathi",
+  // }
 ]
 
 export {ChapterListData,SettingOptions,Languages,SettingOptionsHindi,SettingOptionsGujrati,SettingOptionsMarathi}

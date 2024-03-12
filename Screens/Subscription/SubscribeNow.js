@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
-import { FlatList } from 'react-native-gesture-handler';
+// import { FlatList } from 'react-native-gesture-handler';
 import { ChapterListData, Languages } from '../../Global/Data/Data';
 import HomeStyles from '../Home/HomeStyles';
 import SubscribeStyle from './SubscribeStyles';

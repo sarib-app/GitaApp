@@ -28,6 +28,10 @@ const [Email, setEmail] = useState('');
   const [EmailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("nothing yet");
+
+  const [responseField, setErrosetResponseField] = useState(false);
+  const [uid,setUid]=useState()
 
   const [Lang,setLang]=useState(Eng)
 
@@ -90,8 +94,10 @@ GetLangLocal()
     React.useEffect(() => {
       setMessage(JSON.stringify(response));
       if (response?.type === "success") {
+
         setAccessToken(response.authentication.accessToken);
         LoginGoogleFirebase(response.authentication.accessToken)
+        setErrosetResponseField(true)
       }
     }, [response]);
   
@@ -182,7 +188,7 @@ async function LoginGoogleFirebase(token){
     const user = userCredential.user;
     await AsyncStorage.setItem("user", JSON.stringify(user));
     await AsyncStorage.setItem("identifier", "null");
-
+    setUid(user.uid)
     await AsyncStorage.setItem("password",password)
     NavigatorHandler()
     setLoading(false)
@@ -191,6 +197,7 @@ async function LoginGoogleFirebase(token){
     const errorCode = error.code;
     const errorMessage = error.message;
     console.error(errorCode, errorMessage);
+    setErrorMessage(errorMessage)
     // Alert.alert("Error",errorMessage)
     // setLoading(false)
 
@@ -247,7 +254,7 @@ async function LoginGoogleFirebase(token){
     </View>
     
     {/* Email Field */}
-    <View style={[AuthStyles.inputContainer, { borderColor: EmailError && !Email? 'red' : '#3C3737' }]}>
+    {/* <View style={[AuthStyles.inputContainer, { borderColor: EmailError && !Email? 'red' : '#3C3737' }]}>
       <AntDesign name="user" size={24} color="white" />
       <TextInput
         style={AuthStyles.input}
@@ -255,11 +262,11 @@ async function LoginGoogleFirebase(token){
         placeholderTextColor="#808080"
         onChangeText={(text) => setEmail(text)}
       />
-    </View>
+    </View> */}
     <Text style={AuthStyles.errorText}>{!Email && EmailError}</Text>
 
     {/* Password Field */}
-    <View style={[AuthStyles.inputContainer, { borderColor: passwordError && !password ? 'red' : '#3C3737' }]}>
+    {/* <View style={[AuthStyles.inputContainer, { borderColor: passwordError && !password ? 'red' : '#3C3737' }]}>
       <AntDesign name="lock" size={24} color="white" />
       <TextInput
         style={AuthStyles.input}
@@ -268,8 +275,15 @@ async function LoginGoogleFirebase(token){
         secureTextEntry
         onChangeText={(text) => setPassword(text)}
       />
-    </View>
+    </View> */}
     <Text style={AuthStyles.errorText}>{!password &&passwordError}</Text>
+    <Text style={AuthStyles.errorText}>{message}</Text>
+    <Text style={AuthStyles.errorText}>{responseField === true&& "UseEffect Called"}</Text>
+    <Text style={AuthStyles.errorText}>{"Google error:" +errorMessage}</Text>
+    <Text style={AuthStyles.errorText}>{"access Token"+accessToken}</Text>
+    <Text style={AuthStyles.errorText}>{"uid"+uid}</Text>
+
+
 
     {/* Login Button */}
     {

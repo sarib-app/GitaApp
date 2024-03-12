@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList } from 'react-native';
 import HomeStyles from '../Home/HomeStyles';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
-import { FlatList } from 'react-native-gesture-handler';
+// import { FlatList } from 'react-native-gesture-handler';
 import { ChapterListData, SettingOptions,SettingOptionsHindi,SettingOptionsGujrati,SettingOptionsMarathi } from '../../Global/Data/Data';
 import { useNavigation } from '@react-navigation/native';
 import AuthStyles from '../Auth/AuthStyles';
@@ -158,4 +158,10 @@ function ChapterContent({item}){
 
 
 export default RenderBook;
-const ContainerChapExt ={backgroundColor:Colors.SecondaryDark,marginTop:-2,marginLeft:-2,   justifyContents:'center'}
+const ContainerChapExt 
+={ 
+  backgroundColor:Colors.SecondaryDark,
+  marginTop:-2,
+  marginLeft:-2,   
+  justifyContents:'center'
+}

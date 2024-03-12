@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity ,FlatList} from 'react-native';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
-import { FlatList } from 'react-native-gesture-handler';
+// import { FlatList } from 'react-native-gesture-handler';
 import { ChapterListData, Languages } from '../../Global/Data/Data';
 import HomeStyles from '../Home/HomeStyles';
 import Language from './Language';
@@ -15,12 +15,12 @@ import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
 const SelectLanguage = () => {
   const navigation = useNavigation()
-const [SelectLang,setSelectLang] = useState("English")
+const [SelectLang,setSelectLang] = useState("English") 
 
 const [Lang,setLang]=useState(Eng)
 const focused= useIsFocused()
   useEffect(()=>{
-async function GetLangLocal(){
+  async function GetLangLocal(){
   const selection = await AsyncStorage.getItem("selectedLang")
   if(selection){
     setSelectLang(selection)
@@ -28,27 +28,30 @@ async function GetLangLocal(){
       setLang(Eng)
     }
     else if(selection === "Hindi"){
-setLang(Hindi)
+  setLang(Hindi)
     }
     else if(selection === "Gujrati"){
-setLang(Gujrati)
+  setLang(Gujrati)
     }
     else{
-setLang(Marathi)
+  setLang(Marathi)
     }
   }
-}
-GetLangLocal()
-
+  }
+  GetLangLocal()
   },[focused,SelectLang])
 async function SetTheLanguage(){
 
    await AsyncStorage.setItem("selectedLang",SelectLang)
-    const getUser = AsyncStorage.getItem("user")
-    if (getUser) {
+    const getUser = await AsyncStorage.getItem("user")
+    const user= JSON.parse(getUser)
+    if (user) {
     navigation.navigate('BottomNavigation')
+    console.log("user",user)
     } else {
     navigation.navigate('Login')
+    // console.log("unot ser","getUser")
+
     }
     // onAuthStateChanged(auth, (user) => {
     // });
