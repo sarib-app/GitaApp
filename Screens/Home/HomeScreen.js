@@ -9,10 +9,9 @@ import { Eng, Gujrati,Hindi, Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import BookGujrati from '../../Global/Data/BookGujarati';
+import { BookGujarati } from '../../Global/Data/BookGujarati';
 import { BookEnglish } from '../../Global/Data/BookEnglish';
 import { BookHindi } from '../../Global/Data/BookHindi';
-
 import { useNavigation } from '@react-navigation/native';
 const HomeScreen = () => {
 const navigation =useNavigation()
@@ -41,7 +40,7 @@ setBookData(BookHindi)
     }
     else if(selection === "Gujrati"){
 setLang(Gujrati)
-setBookData(BookGujrati)
+setBookData(BookGujarati)
 
     }
     else{
@@ -67,32 +66,26 @@ if(ParsedFav){
 
  const data = selected === "All"? listData:favListData
 
-function onSearch(e){
-  const searchText = e; // Example search text
-const datafortSearch = selected === "All"? bookData: favListTemp
+ function onSearch(e) {
+  const searchText = e.toLowerCase(); // Convert the search text to lower case
+  const datafortSearch = selected === "All" ? bookData : favListTemp
+
   const filteredData = datafortSearch.filter((chapter) => {
-    // Check if the search text matches any content within verses
     const foundInVerses = chapter.verses.some((verse) => {
       const { original, translation } = verse.text;
       return (
-        original.includes(searchText) ||
-        // commentary.includes(searchText) ||
-        translation.includes(searchText)
+        original.toLowerCase().includes(searchText) ||
+        translation.toLowerCase().includes(searchText)
       );
     });
   
-    // Check if the search text matches the chapter title or description
-    const foundInChapterInfo = chapter.Title.includes(searchText) 
-    
-    // || chapter.Description.includes(searchText);
-  
+    const foundInChapterInfo = chapter.Title.toLowerCase().includes(searchText); // Convert text being searched to lower case
+
     return foundInVerses || foundInChapterInfo;
   });
 
-  // console.log(filteredData)
   setListData(selected === "All"?filteredData: listData)
   setFavListData(selected === "Fav"?filteredData: favListData)
-
 }
 
 
@@ -116,7 +109,7 @@ const datafortSearch = selected === "All"? bookData: favListTemp
               <View style={HomeStyles.chapterInfo}>
               <View style={[HomeStyles.chapterInfo,ContainerChapExt]}>
                 <Text style={HomeStyles.chapterTitle}>Chapter {item.id}</Text>
-                <Text style={HomeStyles.chapterDescription}>{item.Description}</Text>
+                <Text style={HomeStyles.chapterDescription}>{item.Title}</Text>
               </View>
               </View>
             {/* </View> */}

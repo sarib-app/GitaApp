@@ -25,6 +25,8 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.app.gitapp"
+     
+
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,5 +38,9 @@
     },
     "scheme": "com.app.gitapp",
     "owner": "karanvani"
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-6119482859365304~4838938646",
+    "ios_app_id": "ca-app-pub-6119482859365304~4075880684"
   }
 }

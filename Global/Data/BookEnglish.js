@@ -1,7 +1,8 @@
 const BookEnglish = [
   {
     "id": 1,
-    "Title": "Chapter 1",
+    "Title": "Arjun Viṣhād Yog",
+    "Subtitle": "Lamenting the Consequences of War",
     "verses": [
       {
         "verse_number": 1,
@@ -335,7 +336,8 @@ const BookEnglish = [
   },
   {
     "id": 2,
-    "Title": "Chapter 2",
+    "Title": "Sānkhya Yog",
+    "Subtitle": "The Yog of Analytical Knowledge",
     "verses": [
       {
         "verse_number": 1,
@@ -917,7 +919,8 @@ const BookEnglish = [
   },
   {
     "id": 3,
-    "Title": "Chapter 3",
+    "Title": "Karm Yog",
+    "Subtitle": "The Yog of Action",
     "verses": [
       {
         "verse_number": 1,
@@ -1267,7 +1270,8 @@ const BookEnglish = [
   },
   {
     "id": 4,
-    "Title": "Chapter 4",
+    "Title": "Jñāna Karm Sanyās Yog",
+    "Subtitle": "The Yog of Knowledge and the Disciplines of Action",
     "verses": [
       {
         "verse_number": 1,
@@ -1609,7 +1613,8 @@ const BookEnglish = [
   },
   {
     "id": 5,
-    "Title": "Chapter 5",
+    "Title": "Karm Sanyās Yog",
+    "Subtitle": "The Yog of Renunciation",
     "verses": [
       {
         "verse_number": 1,
@@ -1847,7 +1852,8 @@ const BookEnglish = [
   },
   {
     "id": 6,
-    "Title": "Chapter 6",
+    "Title": "Dhyān Yog",
+    "Subtitle": "Lamenting the Consequences of War",
     "verses": [
       {
         "verse_number": 1,
@@ -2229,7 +2235,8 @@ const BookEnglish = [
   },
   {
     "id": 7,
-    "Title": "Chapter 7",
+    "Title": "Jñāna Vijñāna Yog",
+    "Subtitle": "Yog through the Realization of Divine Knowledge",
     "verses": [
       {
         "verse_number": 1,
@@ -2475,7 +2482,8 @@ const BookEnglish = [
   },
   {
     "id": 8,
-    "Title": "Chapter 8",
+    "Title": "Akṣhar Brahma Yog",
+    "Subtitle": "The Yog of the Eternal God",
     "verses": [
       {
         "verse_number": 1,
@@ -2705,7 +2713,8 @@ const BookEnglish = [
   },
   {
     "id": 9,
-    "Title": "Chapter 9",
+    "Title": "Rāja Vidyā Yog",
+    "Subtitle": "Yog through the King of Sciences",
     "verses": [
       {
         "verse_number": 1,
@@ -2983,7 +2992,8 @@ const BookEnglish = [
   },
   {
     "id": 10,
-    "Title": "Chapter 10",
+    "Title": "Chapter 10: Vibhūti Yog",
+    "Subtitle": "Yog through Appreciating the Infinite Opulences of God",
     "verses": [
       {
         "verse_number": 1,
@@ -3325,7 +3335,8 @@ const BookEnglish = [
   },
   {
     "id": 11,
-    "Title": "Chapter 11",
+    "Title": "Viśhwarūp Darśhan Yog",
+    "Subtitle": "Yog through Beholding the Cosmic Form of God",
     "verses": [
       {
         "verse_number": 1,
@@ -3771,7 +3782,8 @@ const BookEnglish = [
   },
   {
     "id": 12,
-    "Title": "Chapter 12",
+    "Title": "Bhakti Yog",
+    "Subtitle": "The Yog of Devotion",
     "verses": [
       {
         "verse_number": 1,
@@ -3937,7 +3949,8 @@ const BookEnglish = [
   },
   {
     "id": 13,
-    "Title": "Chapter 13",
+    "Title": "Kṣhetra Kṣhetrajña Vibhāg Yog",
+    "Subtitle": "Yog through Distinguishing the Field and the Knower of the Field",
     "verses": [
       {
         "verse_number": 1,
@@ -4223,7 +4236,8 @@ const BookEnglish = [
   },
   {
     "id": 14,
-    "Title": "Chapter 14",
+    "Title": "Guṇa Traya Vibhāg Yog",
+    "Subtitle": "Yog through Understanding the Three Modes of Material Nature",
     "verses": [
       {
         "verse_number": 1,
@@ -4445,7 +4459,8 @@ const BookEnglish = [
   },
   {
     "id": 15,
-    "Title": "Chapter 15",
+    "Title": "Puruṣhottam Yog",
+    "Subtitle": "The Yog of the Supreme Divine Personality",
     "verses": [
       {
         "verse_number": 1,
@@ -4611,7 +4626,8 @@ const BookEnglish = [
   },
   {
     "id": 16,
-    "Title": "Chapter 16",
+    "Title": "Daivāsura Sampad Vibhāg Yog",
+    "Subtitle": "Yog through Discerning the Divine and Demoniac Natures",
     "verses": [
       {
         "verse_number": 1,
@@ -4809,7 +4825,8 @@ const BookEnglish = [
   },
   {
     "id": 17,
-    "Title": "Chapter 17",
+    "Title": "Śhraddhā Traya Vibhāg Yog",
+    "Subtitle": "Yog through Discerning the Three Divisions of Faith",
     "verses": [
       {
         "verse_number": 1,
@@ -5039,7 +5056,8 @@ const BookEnglish = [
   },
   {
     "id": 18,
-    "Title": "Chapter 18",
+    "Title": "Mokṣha Sanyās Yog",
+    "Subtitle": "Yog through the Perfection of Renunciation and Surrender",
     "verses": [
       {
         "verse_number": 1,

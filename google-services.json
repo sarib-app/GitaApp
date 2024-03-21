@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "420870778500",
+    "project_id": "bhagavad-gita-app-official",
+    "storage_bucket": "bhagavad-gita-app-official.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420870778500:android:4c294a58b0400bd3b51cd1",
+        "android_client_info": {
+          "package_name": "com.app.gitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420870778500-n4mfqnmfla8p97u0rgcpq9satk962fil.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.gitapp",
+            "certificate_hash": "e0770aa463c85cbe5da738b635582bc24308d61e"
+          }
+        },
+        {
+          "client_id": "420870778500-bfs7guhtoe3a99jden68968i3iu7qe97.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG0tgRETaaWAFAMohxdd7BP6dnH6vVG6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420870778500-bfs7guhtoe3a99jden68968i3iu7qe97.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "420870778500-bjdvpr3127ve30dhi0bsloib2g1d7da8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.gitapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

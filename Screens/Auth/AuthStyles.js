@@ -15,6 +15,7 @@ const AuthStyles = StyleSheet.create({
       logoContainer: {
         alignItems: 'center',
         marginBottom: 30,
+        marginTop:30
       },
       logoText: {
         fontSize: 24,

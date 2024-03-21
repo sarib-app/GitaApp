@@ -14,6 +14,10 @@ import GoogleSignInButton from './Screens/Auth/GoogleLogin';
 import TermsConditionsScreen from './Screens/AppContent/Terms&Conditions';
 import PrivacyPolicyScreen from './Screens/AppContent/PrivacyPolicy';
 import AboutUsScreen from './Screens/AppContent/AboutUs';
+import StripePaymentScreen from './Screens/Subscription/SampleStripe';
+import PackageScreen from './Screens/PackageSubscription.js/PackageScreen';
+import ForgetPassword from './Screens/Auth/ForgetPassword';
+// import 'expo-dev-client'
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -33,6 +37,10 @@ const App = () => {
         <Stack.Screen name="AboutUsScreen" component={AboutUsScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TermsConditionsScreen" component={TermsConditionsScreen} options={{ headerShown: false }} />
         <Stack.Screen name="PrivacyPolicyScreen" component={PrivacyPolicyScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="StripePaymentScreen" component={StripePaymentScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="PackageScreen" component={PackageScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="ForgetPassword" component={ForgetPassword} options={{ headerShown: false }} />
+
 
 
       </Stack.Navigator>

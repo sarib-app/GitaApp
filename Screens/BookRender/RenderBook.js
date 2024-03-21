@@ -12,13 +12,15 @@ import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 // import { BookHindi } from '../../Global/Data/Book';
-import BookGujrati from '../../Global/Data/BookGujarati';
+import { BookGujarati } from '../../Global/Data/BookGujarati';
 import { BookEnglish } from '../../Global/Data/BookEnglish';
 import { BookHindi } from '../../Global/Data/BookHindi';
 import { Entypo } from '@expo/vector-icons';
 import addToFavorites from './addToFav';
 import removeFromFavorites from './RemoveFav';
 import fetchFavorites from './fetchFav';
+import { BannerAd, BannerAdSize, TestIds, } from 'react-native-google-mobile-ads';
+
 const RenderBook = ({route}) => {
     const { item } = route.params;
     const { selected } = route.params;
@@ -42,7 +44,7 @@ const RenderBook = ({route}) => {
 
       }
       else if(selection === "Gujrati"){
-        setBookData(BookGujrati)
+        setBookData(BookGujarati)
 
 
       }
@@ -93,7 +95,7 @@ function ChapterContent({item}){
   
         return(
             // <View style={HomeStyles.chapterContainer}>
-         
+         <>
               <View 
              
               style={{backgroundColor:Colors.SecondaryDark,padding:20,borderRadius:20,marginBottom:20}}>
@@ -121,7 +123,16 @@ function ChapterContent({item}){
                         </Text>
                     {" "+item.commentary}
                 </Text>
+      
               </View>
+              <BannerAd 
+        unitId={TestIds.BANNER}
+        size={BannerAdSize.LARGE_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true
+        }}
+      />
+              </>
       
         )
 }
@@ -131,10 +142,10 @@ function ChapterContent({item}){
       {/* Title */}
     <View style={HomeStyles.container}>
 
-      <Text style={[HomeStyles.title,{marginBottom:5,fontSize:27}]}>Chapter {item.id}</Text>
-      <Text style={[HomeStyles.title,{fontSize:17,color:Colors.PrimaryColor}]}>{item.chapter}</Text>
+      <Text style={[HomeStyles.title,{marginBottom:5,fontSize:27}]}>Chapter {item.Title}</Text>
+      <Text style={[HomeStyles.title,{fontSize:17,color:Colors.PrimaryColor}]}>{item.Subtitle}</Text>
 
-
+     
  
       {/* List of Chapters */}
       {/* You can map over your chapters data and render each chapter */}

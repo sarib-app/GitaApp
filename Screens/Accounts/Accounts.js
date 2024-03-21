@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet,TouchableOpacity, Alert } from 'react-native';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
 import { useNavigation } from '@react-navigation/native';
@@ -13,13 +13,18 @@ import { auth } from '../../config/firebase';
 import updateEmaill from '../../Components/GlobalCalls/UpdateEmail';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
+import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTableData';
+
 
 const AccountScreen = () => {
 const navigation = useNavigation()
 const [user,setUser]=useState(null)
+const [subscriptionData,setSubscriptionData]=useState(null)
+
 const [email,setEmail]=useState()
 const [oldPassword,setOldPassword]=useState(0)
 const [Lang,setLang]=useState(Eng)
+const [identifier,setidentifier]=useState("")
 
 
 const focused= useIsFocused()
@@ -50,28 +55,47 @@ useEffect(()=>{
 
 
   GetData()
-},[])
+},[focused])
+
   
 async function GetData(){
 
   const getPassword = await AsyncStorage.getItem("password")
-  
-console.log(getPassword)
+  const identifier = await AsyncStorage.getItem("identifier")
+  setidentifier(identifier)
+    const userData = await AsyncStorage.getItem("user")
+  const ParsedUser = JSON.parse(userData)
+  setUser(ParsedUser)
+  fetchSubscriptionData(ParsedUser.uid)
+console.log(ParsedUser)
   setOldPassword(getPassword)
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-     
-      setUser(user)
-      // ...
-    } else {
-      // User is signed out
-      // ...
-      console.log("dsa")
-    }
-  });
+ 
 }
+
+
+const fetchSubscriptionData = async (userUid) => {
+  try {
+    const data = await getUserSubscriptionData(userUid);
+    if (data) {
+      // Convert Firestore Timestamps to JavaScript Dates
+      const subscriptionDate = data.subscriptionDate ? new Date(data.subscriptionDate.seconds * 1000) : null;
+      const expDate = data.ExpDate ? new Date(data.ExpDate.seconds * 1000) : null;
+
+      // Create a new object that replaces the Firestore Timestamps with JavaScript Date objects
+      const subscriptionDataWithDates = {
+        ...data,
+        subscriptionDate,
+        ExpDate: expDate
+      };
+console.log(subscriptionDataWithDates)
+      setSubscriptionData(subscriptionDataWithDates);
+    }
+  } catch (error) {
+    // Handle any errors that occur during the fetch operation
+    Alert.alert("Error","Could not fetch package details!")
+  }
+};
+
   return (
     <View style={GlobalStyles.container}>
       {/* Title */}
@@ -81,11 +105,20 @@ console.log(getPassword)
       <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.SubscriptionTitle}</Text>
 
 <TouchableOpacity 
-       onPress={()=> navigation.navigate("SubscribeNow")}
+       onPress={()=> navigation.navigate("PackageScreen")}
        style={AccountStyle.chapterInfo}>
-       
-       <Text style={AccountStyle.chapterTitle}>{Lang.AccountScreenTxt.SusbcriptionTxt1}</Text>
+       {
+        subscriptionData?
+   <>
+        <Text style={AccountStyle.chapterTitle}>{subscriptionData?.pacakgeTaken}</Text>
+        <Text style={AccountStyle.chapterDescription}>{Lang.AccountScreenTxt.SusbcriptionTxt3 + ":" + subscriptionData?.ExpDate}</Text>
+</>
+:<>
+         <Text style={AccountStyle.chapterTitle}>{Lang.AccountScreenTxt.SusbcriptionTxt1}</Text>
        <Text style={AccountStyle.chapterDescription}>{Lang.AccountScreenTxt.SusbcriptionTxt3}</Text>
+       </>
+
+      }
     
      </TouchableOpacity>
      
@@ -99,7 +132,7 @@ console.log(getPassword)
 
       <View style={AccountStyle.chapterInfo}>
              
-             <Text style={AccountStyle.chapterTitle}>{"John Smith"}</Text>
+             <Text style={AccountStyle.chapterTitle}>{user?.displayName}</Text>
              <Text style={AccountStyle.chapterDescription}>{"Update Account name"}</Text>
           
            </View>
@@ -123,7 +156,7 @@ console.log(getPassword)
 
 
 {
-  oldPassword != "null" &&
+  identifier === "firebase" &&
 
   <>
      <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.PasswordTitle}</Text>

@@ -12,6 +12,7 @@ import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
+import { ScrollView } from 'react-native-gesture-handler';
 const Settings = () => {
   const [Lang,setLang]=useState(Eng)
   const [listData,setListData]=useState(SettingOptions)
@@ -83,8 +84,9 @@ const navigation= useNavigation()
     <View style={GlobalStyles.container}>
       {/* Title */}
     <View style={HomeStyles.container}>
-
       <Text style={HomeStyles.title}>Settings</Text>
+<ScrollView nestedScrollEnabled={true} contentContainerStyle={{alignItems:'center'}}>
+
 
  
       {/* List of Chapters */}
@@ -105,6 +107,8 @@ style={[AuthStyles.button,{marginTop:20}]}>
     {Lang.SettingScreenTxt.Button1Txt}
 </Text>
 </TouchableOpacity>
+
+</ScrollView>
 
     </View>
 

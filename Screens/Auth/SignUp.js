@@ -80,6 +80,8 @@ GetLangLocal()
         console.log(user.uid);
         await AsyncStorage.setItem("user", JSON.stringify(user));
         await AsyncStorage.setItem("password", password);
+        await AsyncStorage.setItem("identifier", "firebase");
+
         navigation.navigate("BottomNavigation");
         navigation.reset({
           index: 0,
