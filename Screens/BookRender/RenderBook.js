@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList,Alert } from 'react-native';
 import HomeStyles from '../Home/HomeStyles';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
@@ -20,11 +20,14 @@ import addToFavorites from './addToFav';
 import removeFromFavorites from './RemoveFav';
 import fetchFavorites from './fetchFav';
 import { BannerAd, BannerAdSize, TestIds, } from 'react-native-google-mobile-ads';
+import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTableData';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const RenderBook = ({route}) => {
     const { item } = route.params;
     const { selected } = route.params;
     const [bookData,setBookData]=useState(BookEnglish)
+    const [showAds,setShowAds]=useState(false)
 
     const id=item.id
     const Title = item.Title
@@ -68,10 +71,57 @@ const RenderBook = ({route}) => {
       setFavs(favResult)
     }
     fetchFavCall()
+    GetData()
     },[])
       
 const Data = bookData.find((item) => item.id === id);
 const filteredFavData = Data.verses.filter(verse => favs.includes(verse.verse_number));
+
+async function GetData(){
+
+  const userData = await AsyncStorage.getItem("user")
+  const ParsedUser = JSON.parse(userData)
+  fetchSubscriptionData(ParsedUser.uid)
+
+ 
+ 
+}
+
+
+const today = new Date()
+const fetchSubscriptionData = async (userUid) => {
+  try {
+    const data = await getUserSubscriptionData(userUid);
+    if (data) {
+      // Convert Firestore Timestamps to JavaScript Dates
+      const subscriptionDate = data.subscriptionDate ? new Date(data.subscriptionDate.seconds * 1000) : null;
+      const expDate = data.ExpDate ? new Date(data.ExpDate.seconds * 1000) : null;
+
+      // Create a new object that replaces the Firestore Timestamps with JavaScript Date objects
+      const subscriptionDataWithDates = {
+        ...data,
+        subscriptionDate,
+        ExpDate: expDate
+      };
+
+
+      if (expDate && expDate <= today) {
+        setShowAds(true); // Set a state variable to indicate whether to show ads
+      } else {
+        setShowAds(false);
+      }
+     
+      // setSubscriptionData(subscriptionDataWithDates);
+    }else{
+      setShowAds(true)
+    }
+  } catch (error) {
+    setShowAds(true)
+
+    // Handle any errors that occur during the fetch operation
+    Alert.alert("Error","Could not fetch package details!")
+  }
+};
 
     
 function ChapterContent({item}){
@@ -125,14 +175,23 @@ function ChapterContent({item}){
                 </Text>
       
               </View>
+              {
+showAds === true &&
+<View style={{marginBottom:20}}>
+
               <BannerAd 
         unitId={TestIds.BANNER}
+      
         size={BannerAdSize.LARGE_BANNER}
         requestOptions={{
           requestNonPersonalizedAdsOnly: true
         }}
       />
-              </>
+</View>
+
+    }
+
+      </>
       
         )
 }
@@ -142,7 +201,10 @@ function ChapterContent({item}){
       {/* Title */}
     <View style={HomeStyles.container}>
 
-      <Text style={[HomeStyles.title,{marginBottom:5,fontSize:27}]}>Chapter {item.Title}</Text>
+      <Text style={[HomeStyles.title,{marginBottom:5,fontSize:23}]}>Chapter {item.Title}</Text>
+
+      <ScrollView>
+
       <Text style={[HomeStyles.title,{fontSize:17,color:Colors.PrimaryColor}]}>{item.Subtitle}</Text>
 
      
@@ -159,6 +221,7 @@ function ChapterContent({item}){
     }
       />
    
+   </ScrollView>
 
 
     </View>

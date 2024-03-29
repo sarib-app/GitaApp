@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity,Image,Animated } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,Image,Animated ,Modal} from 'react-native';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
 import { AntDesign } from '@expo/vector-icons';
@@ -11,8 +11,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Eng, Gujrati,Hindi} from '../../Global/Data/Language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
-import hands from '../../assets/Imgs/hands.png'
-const PackageScreen = () => {
+import sitingman from '../../assets/Imgs/sitingman.png'
+const SuccessScreen = () => {
 const [SelectLang,setSelectLang] = useState("English")
 const [Lang,setLang]=useState(Eng)
 const focused= useIsFocused()
@@ -107,43 +107,49 @@ function ScreenUi(){
 
 
   return (
+    <Modal
+    visible={true}
+    transparent={true}
+    animationType='slide'
+    
+    >
+
     <View style={[GlobalStyles.container,{alignItems:'center'}]}>
 
 <Image 
-source={hands}
+source={sitingman}
 style={{height:250,width:250,marginTop:100}}
 />
 
-<Animated.View style={[{alignItems:'center'}, { transform: [{ scale: bounceValue }] }]}>
-     <View style={SubscribeStyle.CenterAligner}>
-     <AntDesign name="checkcircle" size={24} color={Colors.PrimaryColor} />
-     <Text style={SubscribeStyle.Txt}>{Lang.PackageScreen.AdTxt}</Text>
-     </View>
-     </Animated.View>
 
+
+   
      <TouchableOpacity 
-     onPress={()=>navigation.navigate("SubscribeNow",{ data: 900 })}
+
 
      style={[SubscribeStyle.Buttons,{marginTop:20}]}>
     
-     <Text style={[SubscribeStyle.Txt,{marginLeft:0,fontSize:18,color:"black"}]}>{Lang.PackageScreen.Package1}</Text>
-     <Text style={{color:"black"}}>{Lang.PackageScreen.Package1_Sub}</Text>
+     <Text style={[SubscribeStyle.Txt,{marginLeft:0,fontSize:40,color:"black", textAlign:"center"}]}>{Lang.SuccessScreen.Button1}</Text>
+    
 
      </TouchableOpacity>
+     <Animated.View style={[{alignItems:'center'}, { transform: [{ scale: bounceValue }] }]}>
      <TouchableOpacity 
-          onPress={()=>navigation.navigate("SubscribeNow",{ data: 99 })}
+      onPress={()=>navigation.navigate("BottomNavigation")}
 
      style={[SubscribeStyle.Buttons,{backgroundColor:"#FFD6A4"}]}>
     
-    <Text style={[SubscribeStyle.Txt,{marginLeft:0,fontSize:18,color:"black"}]}>{Lang.PackageScreen.Package2}</Text>
-    <Text style={{color:"black"}}>{Lang.PackageScreen.Package2_sub}</Text>
+    <Text style={[SubscribeStyle.Txt,{marginLeft:0,fontSize:25,color:"black", textAlign:"center"}]}>{Lang.SuccessScreen.Button2}</Text>
+
 
     </TouchableOpacity>
-
+    </Animated.View>
     </View>
+    </Modal>
+
   );
 
 };
 
 
-export default PackageScreen;
+export default SuccessScreen;

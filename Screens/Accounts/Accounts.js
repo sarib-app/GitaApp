@@ -20,6 +20,8 @@ const AccountScreen = () => {
 const navigation = useNavigation()
 const [user,setUser]=useState(null)
 const [subscriptionData,setSubscriptionData]=useState(null)
+const [PackageValid,setPackageValid]=useState(false)
+const [loading,setLoading]=useState(false)
 
 const [email,setEmail]=useState()
 const [oldPassword,setOldPassword]=useState(0)
@@ -72,8 +74,10 @@ console.log(ParsedUser)
  
 }
 
+const today = new Date()
 
 const fetchSubscriptionData = async (userUid) => {
+  setLoading(true)
   try {
     const data = await getUserSubscriptionData(userUid);
     if (data) {
@@ -87,14 +91,57 @@ const fetchSubscriptionData = async (userUid) => {
         subscriptionDate,
         ExpDate: expDate
       };
-console.log(subscriptionDataWithDates)
+
+      
+
       setSubscriptionData(subscriptionDataWithDates);
+      if (expDate && expDate >= today) {
+        setPackageValid(true); // Set a state variable to indicate whether to show ads
+      } 
     }
   } catch (error) {
     // Handle any errors that occur during the fetch operation
     Alert.alert("Error","Could not fetch package details!")
+  }finally{
+    setLoading(false)
   }
 };
+
+
+
+
+function handleavigator(){
+  if(PackageValid){
+
+
+    Alert.alert(
+      "Please Wait", // Title
+      `You currently have a valid ${subscriptionData?.pacakgeTaken} package, you want to upgrade/re-new?`, // Message
+      [
+        // The "Yes" button
+        {
+          text: "Yes I want to upgrade",
+          onPress: () => {
+            // Call the function to open the store here
+            navigation.navigate("PackageScreen");
+          },
+        },
+        // The "No" button
+        {
+          text: "No",
+          onPress: () => {
+            // Perhaps update app state or inform analytics of the user's choice
+            console.log("User chose not to rate the app.");
+          },
+        },
+      ])
+ }else{
+
+   navigation.navigate("PackageScreen")
+ }
+
+
+}
 
   return (
     <View style={GlobalStyles.container}>
@@ -104,8 +151,13 @@ console.log(subscriptionDataWithDates)
       <Text style={AccountStyle.title}>Accounts</Text>
       <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.SubscriptionTitle}</Text>
 
-<TouchableOpacity 
-       onPress={()=> navigation.navigate("PackageScreen")}
+
+{
+  loading === false &&
+  <TouchableOpacity 
+       onPress={()=> 
+        handleavigator()
+      }
        style={AccountStyle.chapterInfo}>
        {
         subscriptionData?
@@ -121,6 +173,8 @@ console.log(subscriptionDataWithDates)
       }
     
      </TouchableOpacity>
+}
+
      
   
 

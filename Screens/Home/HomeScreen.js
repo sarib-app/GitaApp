@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList ,Alert} from 'react-native';
 import HomeStyles from './HomeStyles';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
@@ -13,11 +13,32 @@ import { BookGujarati } from '../../Global/Data/BookGujarati';
 import { BookEnglish } from '../../Global/Data/BookEnglish';
 import { BookHindi } from '../../Global/Data/BookHindi';
 import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTableData';
+import { BannerAd, BannerAdSize, TestIds,InterstitialAd,AdEventType } from 'react-native-google-mobile-ads';
+
+
+
+
+// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+const adUnitId = TestIds.INTERSTITIAL ;
+
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+});
+
+
+
 const HomeScreen = () => {
 const navigation =useNavigation()
+const [loaded, setLoaded] = useState(false);
+
   const [Lang,setLang]=useState(Eng)
   const [listData,setListData]=useState(BookEnglish)
   const [bookData,setBookData]=useState(BookEnglish)
+  const [showAds,setShowAds]=useState(false)
 
   const [favListData,setFavListData]=useState([])
   const [favListTemp,setFavListTemp]=useState([])
@@ -25,34 +46,152 @@ const navigation =useNavigation()
   const [selected,SetSelected]=useState("All")
 
 const focused= useIsFocused()
+
+// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'your-ad-unit-id';
+// const adUnitId = TestIds.INTERSTITIAL ;
+
+// const interstitialAd = InterstitialAd.createForAdRequest(adUnitId);
   useEffect(()=>{
 async function GetLangLocal(){
   const selection = await AsyncStorage.getItem("selectedLang")
   if(selection){
     if(selection === "English"){
       setLang(Eng)
+      setListData(BookEnglish)
+
       setBookData(BookEnglish)
     }
     else if(selection === "Hindi"){
 setLang(Hindi)
+setListData(BookHindi)
 setBookData(BookHindi)
 
     }
     else if(selection === "Gujrati"){
 setLang(Gujrati)
 setBookData(BookGujarati)
+setListData(BookGujarati)
 
     }
     else{
 setLang(Marathi)
 setBookData(BookEnglish)
+setListData(BookEnglish)
 
     }
   }
 }
 GetLangLocal()
 GetFav()
+GetData()
   },[focused])
+
+
+
+  useEffect(() => {
+    const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+      setLoaded(true);
+    });
+
+    // Start loading the interstitial straight away
+    interstitial.load();
+
+    // Unsubscribe from events on unmount
+    return unsubscribe;
+  }, []);
+
+
+
+
+
+
+
+
+  // useEffect(() => {
+  //   const eventListener = interstitialAd.onAdEvent((type) => {
+  //     if (type === AdEventType.LOADED) {
+  //       // Ad is ready to be displayed, wait for the user to navigate
+  //     } else if (type === AdEventType.ERROR) {
+  //       // Handle the error here if needed
+  //     } else if (type === AdEventType.CLOSED) {
+  //       // Resume to Screen B after the ad has been closed
+  //       navigation.navigate('RenderBook');
+  //     }
+  //   });
+
+  //   // Start loading the ad
+  //   interstitialAd.load();
+
+  //   // Unsubscribe from events on cleanup
+  //   return () => {
+  //     eventListener();
+  //   };
+  // }, []);
+
+
+  // const handleNavigateToScreenB = () => {
+  //   if (interstitialAd.loaded) {
+  //     interstitialAd.show();
+  //   } else {
+  //     // Navigate to Screen B if the ad is not ready
+  //     navigation.navigate('RenderBook');
+  //   }
+  // };
+
+
+  async function GetData(){
+
+    const userData = await AsyncStorage.getItem("user")
+    const ParsedUser = JSON.parse(userData)
+    fetchSubscriptionData(ParsedUser.uid)
+  
+   
+   
+  }
+  
+
+
+  const today = new Date()
+  const fetchSubscriptionData = async (userUid) => {
+    try {
+      const data = await getUserSubscriptionData(userUid);
+      if (data) {
+        // Convert Firestore Timestamps to JavaScript Dates
+        const subscriptionDate = data.subscriptionDate ? new Date(data.subscriptionDate.seconds * 1000) : null;
+        const expDate = data.ExpDate ? new Date(data.ExpDate.seconds * 1000) : null;
+  
+        // Create a new object that replaces the Firestore Timestamps with JavaScript Date objects
+        const subscriptionDataWithDates = {
+          ...data,
+          subscriptionDate,
+          ExpDate: expDate
+        };
+  
+  
+        if (expDate && expDate <= today) {
+          setShowAds(true); // Set a state variable to indicate whether to show ads
+        } else {
+          setShowAds(false);
+        }
+       
+        // setSubscriptionData(subscriptionDataWithDates);
+      }else{
+        setShowAds(true)
+      }
+    } catch (error) {
+      setShowAds(true)
+  
+      // Handle any errors that occur during the fetch operation
+      Alert.alert("Error","Could not fetch package details!")
+    }
+  };
+  
+
+
+
+
+
+
 
 
  async function GetFav(){
@@ -64,7 +203,7 @@ if(ParsedFav){
 }
   }
 
- const data = selected === "All"? listData:favListData
+  const data = selected === "All" ? listData : listData.filter(chapter => favListData.some(favChapter => favChapter.id === chapter.id));
 
  function onSearch(e) {
   const searchText = e.toLowerCase(); // Convert the search text to lower case
@@ -90,11 +229,40 @@ if(ParsedFav){
 
 
 
+function handleNaviagation(item){
+  if(showAds === true) {
+
+  if(item.id != 1){
+
+  if(loaded){
+    interstitial.show();
+    navigation.navigate("RenderBook",{item,selected})
+
+  }
+  else{
+
+    navigation.navigate("RenderBook",{item,selected})
+  }
+}
+else{
+
+  navigation.navigate("RenderBook",{item,selected})
+}
+}else{
+    navigation.navigate("RenderBook",{item,selected})
+
+}
+
+}
+
+
     function ChapterList({item,index}){
         return(
           <>
             <TouchableOpacity
-            onPress={()=> navigation.navigate("RenderBook",{item,selected})}
+            onPress={()=> {
+              handleNaviagation(item)
+            }}
             
             style={[HomeStyles.chapterContainer]}>
             {/* Example of a chapter */}
@@ -108,15 +276,17 @@ if(ParsedFav){
             
               <View style={HomeStyles.chapterInfo}>
               <View style={[HomeStyles.chapterInfo,ContainerChapExt]}>
-                <Text style={HomeStyles.chapterTitle}>Chapter {item.id}</Text>
-                <Text style={HomeStyles.chapterDescription}>{item.Title}</Text>
+                {/* <Text style={HomeStyles.chapterTitle}>Chapter {item.id}</Text> */}
+                <Text style={HomeStyles.chapterTitle}>{item.Title}</Text>
+
+                {/* <Text style={HomeStyles.chapterDescription}>{item.Title}</Text> */}
               </View>
               </View>
             {/* </View> */}
           </TouchableOpacity>
           {
             index === data.length-1  && 
-            <View style={{height:400}}>
+            <View style={{height:200}}>
 
             </View>
           }
@@ -126,11 +296,20 @@ if(ParsedFav){
     }
     
 
+
+ 
+
+
+
+
+
+
   
     return (
     <View style={GlobalStyles.container}>
       {/* Title */}
     <View style={HomeStyles.container}>
+<ScrollView>
 
       <Text style={HomeStyles.title}>{Lang.HomScreenTxt.Title}</Text>
 
@@ -173,9 +352,23 @@ if(ParsedFav){
     }
       />
       {/* </View> */}
+      </ScrollView>
 
     </View>
+   { showAds === false &&
+<View style={{bottom:40,position:'absolute',alignSelf:'center'}}>
 
+              <BannerAd 
+        unitId={TestIds.BANNER}
+      
+        size={BannerAdSize.LARGE_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true
+        }}
+      />
+</View>
+
+    }
     </View>
     );
      
@@ -184,4 +377,4 @@ if(ParsedFav){
 
 
 export default HomeScreen;
-const ContainerChapExt ={backgroundColor:Colors.SecondaryDark,marginTop:-2,marginLeft:-2,   justifyContents:'center'}
+const ContainerChapExt ={backgroundColor:Colors.SecondaryDark,marginTop:-2,marginLeft:-2,justifyContent:'center'}

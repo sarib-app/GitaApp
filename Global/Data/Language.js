@@ -25,7 +25,7 @@ const Eng = {
         BoxTxt1:"Free trial for",
         BoxTxt2:"Give me all your money afterwards",
         PriceTxt:"Per month",
-        BoxTxt3:"Read and listen to the Bhagvad Gita in high{'\n'}definaton",
+        BoxTxt3:"Read the bhagavad gita in high definition without ads interupting you.",
         BoxTxt2:"Stay In Touch with current events with the{'\n'}calander.",
         Button1Txt:"Susbcribe Now",
         Button2Txt:"Continue with free Trial"
@@ -48,6 +48,18 @@ BottomTxt2:"Don't have an account? Sign Up"
     },
     SettingScreenTxt:{
         Button1Txt:"Log Out",
+    },
+    PackageScreen:{
+      AdTxt:"Go Ad Free",
+      Package1:"₹900 Annual (₹75/month)",
+      Package1_Sub:"25% Off",
+      Package2:"₹99/Month",
+      Package2_sub:"Cancel Anytime No Commitment"
+    },
+    SuccessScreen:{
+      Button1:"Successfully Subscribed",
+      Button2:"Continue Reading",
+
     }
 }
 
@@ -78,7 +90,7 @@ const Hindi = {
       "BoxTxt1": "मासिक सदस्यता के लिए मुफ्त परीक्षण",
       "BoxTxt2": "बाद में मुझे अपने पैसे सबमिट करें",
       "PriceTxt": "प्रति माह",
-      "BoxTxt3": "उच्च परिभाषा में भगवद्गीत को पढ़ें और सुनें",
+      "BoxTxt3": "भगवद गीता को उच्च परिभाषा में पढ़ें, बिना विज्ञापनों के आपको विचलित किये ",
       "Button1Txt": "अब सदस्यता लें",
       "Button2Txt": "नि: शुल्क परीक्षण के साथ जारी रखें"
     },
@@ -100,7 +112,20 @@ const Hindi = {
     },
     "SettingScreenTxt": {
       "Button1Txt": "लॉग आउट करें"
+    },
+    "PackageScreen": {
+      "AdTxt": "विज्ञापन मुक्त जाओ",
+      "Package1": "₹900 वार्षिक (₹75/महीना)",
+      "Package1_Sub": "25% छूट",
+      "Package2": "₹99/महीना",
+      "Package2_sub": "किसी भी समय रद्द करें, कोई समर्पण नहीं"
+    },
+    "SuccessScreen": {
+      "Button1": "सफलतापूर्वक सदस्यता ली गई",
+      "Button2": "पढ़ाई जारी रखें",
     }
+    
+    
   }
   
 
@@ -131,7 +156,7 @@ const Hindi = {
       "BoxTxt1": "માસિક સભ્યતા માટે મફત ટ્રાયલ",
       "BoxTxt2": "પછી મારા પૈસા આપો",
       "PriceTxt": "પ્રતિ મહિનો",
-      "BoxTxt3": "ઉચ્ચ સંવાદમૂલક ગીતા વાંચો અને સાંભળો",
+      "BoxTxt3": "વિજ્ઞાપનો વિનાની ઉચ્ચ દેફિનીશનમાં ભગવદ ગીતા વાંચો",
       "Button1Txt": "હવે સબ્સ્ક્રાઇબ કરો",
       "Button2Txt": "મફત ટ્રાયલ જારી રાખો"
     },
@@ -153,7 +178,20 @@ const Hindi = {
     },
     "SettingScreenTxt": {
       "Button1Txt": "લૉગ આઉટ કરો"
+    },
+    "PackageScreen": {
+      "AdTxt": "વિજ્ઞાપન મુક્ત જાઓ",
+      "Package1": "₹900 વાર્ષિક (₹75/મહિનો)",
+      "Package1_Sub": "25% છૂટ",
+      "Package2": "₹99/મહિનો",
+      "Package2_sub": "કોઈપણ સમયે રદ કરો, કોઈ બંધકામ નહીં"
+    },
+    "SuccessScreen": {
+      "Button1": "સફળતાપૂર્વક સબ્સ્ક્રાઈબ કરવું",
+      "Button2": "રજૂઆત કરવી રહી છે",
     }
+    
+    
   }
   
 

@@ -16,27 +16,36 @@ import { ScrollView } from 'react-native-gesture-handler';
 const Settings = () => {
   const [Lang,setLang]=useState(Eng)
   const [listData,setListData]=useState(SettingOptions)
+  const [param,setparamm]=useState("en")
 
   const focused= useIsFocused()
   useEffect(()=>{
   async function GetLangLocal(){
   const selection = await AsyncStorage.getItem("selectedLang")
+
   if(selection){
     if(selection === "English"){
       setLang(Eng)
+      setparamm("en")
       setListData(SettingOptions)
     }
     else if(selection === "Hindi"){
+      setparamm("hi")
+
    setLang(Hindi)
    setListData(SettingOptionsHindi)
 
     }
     else if(selection === "Gujrati"){
+      setparamm("gu")
+
 setLang(Gujrati)
 setListData(SettingOptionsGujrati)
 
     }
     else{
+      setparamm("en")
+
 setLang(Marathi)
 setListData(SettingOptionsMarathi)
 
@@ -48,7 +57,7 @@ GetLangLocal()
   },[focused])
 
   function ContactLinker(){
-    Linking.openURL('https://bhagavadgita-app.com/contactus');
+  Linking.openURL(`https://bhagavadgita-app.com/${param}/contactus/`);
 
   }
   
@@ -97,11 +106,13 @@ const navigation= useNavigation()
         return(
             <ChapterList item={item} />
         )
-      }
-    }
+        }
+        }
       />
       <TouchableOpacity
-onPress={()=>navigation.navigate("Login")}
+onPress={()=>{
+  AsyncStorage.clear()
+  navigation.navigate("Login")}}
 style={[AuthStyles.button,{marginTop:20}]}>
 <Text style={AuthStyles.buttonText}>
     {Lang.SettingScreenTxt.Button1Txt}

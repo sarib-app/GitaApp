@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 const SelectLanguage = () => {
   const navigation = useNavigation()
 const [SelectLang,setSelectLang] = useState("English") 
@@ -46,7 +47,7 @@ async function SetTheLanguage(){
     const getUser = await AsyncStorage.getItem("user")
     const user= JSON.parse(getUser)
     if (user) {
-    navigation.navigate('BottomNavigation')
+    navigation.goBack()
     console.log("user",user)
     } else {
     navigation.navigate('Login')
@@ -78,7 +79,7 @@ style={[Language.button,{backgroundColor:item.title === SelectLang ? Colors.ligh
 }
 
   return (
-    <View style={[GlobalStyles.container,{alignItems:'center'}]}>
+    <SafeAreaView style={[GlobalStyles.container,{alignItems:'center'}]}>
       {/* Title */}
     <View style={HomeStyles.container}>
 
@@ -106,7 +107,7 @@ style={[Language.button,{position:'absolute',bottom:100}]}>
 </Text>
 </TouchableOpacity>
 
-    </View>
+    </SafeAreaView>
   );
 
 };

@@ -1,9 +1,45 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, StyleSheet ,ScrollView} from 'react-native';
 import styles from './Styles';
 // import { ScrollView } from 'react-native-gesture-handler';
+import { useIsFocused } from '@react-navigation/native';
+import { TermsEnglish,TermsGujarati,TermsHindi } from '../../Global/Data/AppContentTxt';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TermsConditionsScreen = () => {
+
+
+
+
+
+
+
+  const [Lang,setLang]=useState(TermsEnglish)
+
+
+  const focused= useIsFocused()
+    useEffect(()=>{
+  async function GetLangLocal(){
+    const selection = await AsyncStorage.getItem("selectedLang")
+    if(selection){
+      if(selection === "English"){
+        setLang(TermsEnglish)
+      }
+      else if(selection === "Hindi"){
+  setLang(TermsHindi)
+      }
+      else if(selection === "Gujrati"){
+  setLang(TermsGujarati)
+      }
+      else{
+  setLang(TermsEnglish)
+      }
+    }
+  }
+  GetLangLocal()
+  
+    },[focused])
+
   return (
     <View style={[styles.container, { backgroundColor: '#000' }]}>
            <ScrollView
@@ -13,13 +49,7 @@ const TermsConditionsScreen = () => {
 
       <Text style={styles.heading}>Terms & Conditions</Text>
       <Text style={styles.content}>
-        By using our Bhagavad Gita app, you agree to abide by the following terms and conditions: {"\n\n"}
-        - You may use the app for personal and non-commercial purposes only. {"\n\n"}
-        - Any commercial use or distribution of the app's content is strictly prohibited. {"\n\n"}
-        - We reserve the right to modify or discontinue the app at any time without prior notice. {"\n\n"}
-        - Your use of the app constitutes acceptance of these terms and conditions. {"\n\n"}
-        We may update our Terms & Conditions from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Terms & Conditions on this page. These changes are effective immediately after they are posted on this page. {"\n\n"}
-        If you have any questions or suggestions about our Terms & Conditions, do not hesitate to contact us.
+      {Lang}
       </Text>
       </ScrollView>
 

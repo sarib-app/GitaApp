@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity ,ActivityIndicator, Alert} from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity ,ActivityIndicator, Alert,Animated} from 'react-native';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
 // import { FlatList } from 'react-native-gesture-handler';
@@ -13,13 +13,14 @@ import { Eng, Gujrati,Hindi} from '../../Global/Data/Language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import { createUserRecord } from '../../Components/GlobalCalls/PurchasePackage';
+import SuccessScreen from '../PackageSubscription.js/SuccessScreen';
 const SubscribeNow = ({route}) => {
   const { data } = route.params;
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState('');
   const [user,setUser]=useState(null)
-
+  const [showSuccess,setShowSuccess]=useState(false)
 const Package = data === 99 ? "monthly":"annual"
 
 const [SelectLang,setSelectLang] = useState("English")
@@ -29,6 +30,7 @@ const focused= useIsFocused()
 async function GetLangLocal(){
   const selection = await AsyncStorage.getItem("selectedLang")
   const userData = await AsyncStorage.getItem("user")
+  
   const ParsedUser = JSON.parse(userData)
   setUser(ParsedUser)
   if(selection){
@@ -50,6 +52,37 @@ GetLangLocal()
 
   },[focused])
  
+
+
+
+
+
+  const bounceValue = new Animated.Value(1);
+
+    // Bouncing animation effect
+    const startBouncing = () => {
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(bounceValue, {
+            toValue: 0.9,
+            duration: 500,
+            useNativeDriver: true,
+          }),
+          Animated.timing(bounceValue, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+          }),
+        ]),
+      ).start();
+    };
+  
+    // Call the bouncing animation function
+    startBouncing();
+
+
+
+
 
   const fetchPaymentIntentClientSecret = async () => {
     setLoading(true);
@@ -107,7 +140,8 @@ GetLangLocal()
     } else {
       const purchasePackage = await createUserRecord(user.uid, Package)
       if(purchasePackage === "success"){
-  Alert.alert("Success",'Package purchased successfull!');
+        setShowSuccess(true)
+       Alert.alert("Success",'Package purchased successfull!');
 
 }
 else{
@@ -134,12 +168,12 @@ function MainDesign(){
     <View style={[GlobalStyles.container,{alignItems:'center'}]}>
       {/* Title */}
 
-      <Text style={[HomeStyles.title,{marginTop:100,textAlign:'center',fontWeight:'bold'}]}>{Lang.SubscriptionScreenTxt.Title}{'\n'}John Smith</Text>
+      <Text style={[HomeStyles.title,{marginTop:100,textAlign:'center',fontWeight:'bold'}]}>{Lang.SubscriptionScreenTxt.Title}</Text>
 
    
     
     <View style={SubscribeStyle.ContentContainer}>
-        <Text style={[SubscribeStyle.SimpleTxt,{marginTop:0}]}>{Lang.SubscriptionScreenTxt.BoxTxt1}{"\n"}{Lang.SubscriptionScreenTxt.BoxTxt2}</Text>
+        {/* <Text style={[SubscribeStyle.SimpleTxt,{marginTop:0}]}>{Lang.SubscriptionScreenTxt.BoxTxt1}{"\n"}{Lang.SubscriptionScreenTxt.BoxTxt2}</Text> */}
 
 {/* <Text style={[HomeStyles.title,{marginTop:20}]}>Welcome John Smith</Text> */}
 <TouchableOpacity
@@ -151,11 +185,12 @@ style={SubscribeStyle.bigButton}>
 </TouchableOpacity>
 
 <Text style={SubscribeStyle.SimpleTxt}>{Lang.SubscriptionScreenTxt.BoxTxt3}</Text>
-<Text style={SubscribeStyle.SimpleTxt}>{Lang.SubscriptionScreenTxt.BoxTxt2}</Text>
+{/* <Text style={SubscribeStyle.SimpleTxt}>{Lang.SubscriptionScreenTxt.BoxTxt2}</Text> */}
 {/* <Text style={SubscribeStyle.SimpleTxt}>And More!</Text> */}
 
 
 </View>
+<Animated.View style={[{alignItems:'center'}, { transform: [{ scale: bounceValue }] }]}>
 <TouchableOpacity
 onPress={()=>openPaymentSheet()}
 style={[SubscribeStyle.button]}>
@@ -163,6 +198,7 @@ style={[SubscribeStyle.button]}>
 {Lang.SubscriptionScreenTxt.Button1Txt}
 </Text>
 </TouchableOpacity>
+</Animated.View>
 <TouchableOpacity
 
 style={[SubscribeStyle.button,{backgroundColor:Colors.SecondaryDark}]}>
@@ -185,6 +221,10 @@ style={[SubscribeStyle.button,{backgroundColor:Colors.SecondaryDark}]}>
        <MainDesign/>
       )}
     </View>
+  {
+    showSuccess && 
+    <SuccessScreen />
+  }
   </StripeProvider>
   );
 

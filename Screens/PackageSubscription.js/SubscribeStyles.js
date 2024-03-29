@@ -10,10 +10,10 @@ Title:{
   fontWeight:'bold',
   fontSize:25,margin:10,marginTop:0
 },
-Txt:{
+  Txt:{
   color:Colors.lightTxtClr,
   fontWeight:'500',
-  fontSize:18,marginLeft:10
+  fontSize:28,marginLeft:10
 },
 Buttons:{
   width:WindowWidth/1.2,
@@ -21,7 +21,7 @@ Buttons:{
   backgroundColor:Colors.PrimaryColor,
   padding:12  ,
   marginTop:10,
-  alignItems:'center'
+  // alignItems:'center'
 },
 CenterAligner:{flexDirection:'row',alignItems:'center',margin:7}
 
