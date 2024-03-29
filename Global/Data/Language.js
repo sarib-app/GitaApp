@@ -28,7 +28,7 @@ const Eng = {
         BoxTxt3:"Read the bhagavad gita in high definition without ads interupting you.",
         BoxTxt2:"Stay In Touch with current events with the{'\n'}calander.",
         Button1Txt:"Susbcribe Now",
-        Button2Txt:"Continue with free Trial"
+        Button2Txt:"Continue with Free Version"
     },
     PayNowTxt:{
         Tite:"Subscribe",
@@ -92,7 +92,7 @@ const Hindi = {
       "PriceTxt": "प्रति माह",
       "BoxTxt3": "भगवद गीता को उच्च परिभाषा में पढ़ें, बिना विज्ञापनों के आपको विचलित किये ",
       "Button1Txt": "अब सदस्यता लें",
-      "Button2Txt": "नि: शुल्क परीक्षण के साथ जारी रखें"
+      "Button2Txt": "मुफ्त संस्करण के साथ जारी रखें"
     },
     "PayNowTxt": {
       "Tite": "सदस्यता लें",
@@ -158,7 +158,7 @@ const Hindi = {
       "PriceTxt": "પ્રતિ મહિનો",
       "BoxTxt3": "વિજ્ઞાપનો વિનાની ઉચ્ચ દેફિનીશનમાં ભગવદ ગીતા વાંચો",
       "Button1Txt": "હવે સબ્સ્ક્રાઇબ કરો",
-      "Button2Txt": "મફત ટ્રાયલ જારી રાખો"
+      "Button2Txt": "મફત આવૃત્તિ સાથે ચાલુ રાખો"
     },
     "PayNowTxt": {
       "Tite": "સબ્સ્ક્રાઇબ કરો",

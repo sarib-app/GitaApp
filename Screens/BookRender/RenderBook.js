@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList,Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList,Alert ,Platform} from 'react-native';
 import HomeStyles from '../Home/HomeStyles';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
@@ -22,6 +22,9 @@ import fetchFavorites from './fetchFav';
 import { BannerAd, BannerAdSize, TestIds, } from 'react-native-google-mobile-ads';
 import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTableData';
 import { ScrollView } from 'react-native-gesture-handler';
+const bannerId = Platform.OS === "ios" ? "ca-app-pub-9024884895292195/3410170858":"ca-app-pub-9024884895292195/6048078531"
+const adUnitId = __DEV__ ? TestIds.BANNER : bannerId;
+// const adUnitId = TestIds.INTERSTITIAL ;
 
 const RenderBook = ({route}) => {
     const { item } = route.params;
@@ -180,7 +183,7 @@ showAds === true &&
 <View style={{marginBottom:20}}>
 
               <BannerAd 
-        unitId={TestIds.BANNER}
+        unitId={adUnitId}
       
         size={BannerAdSize.LARGE_BANNER}
         requestOptions={{

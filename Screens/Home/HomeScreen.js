@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList ,Alert} from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList ,Alert, Platform} from 'react-native';
 import HomeStyles from './HomeStyles';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
@@ -18,10 +18,10 @@ import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTab
 import { BannerAd, BannerAdSize, TestIds,InterstitialAd,AdEventType } from 'react-native-google-mobile-ads';
 
 
+const bannerId = Platform.OS === "ios" ? "ca-app-pub-9024884895292195/8810354119":"ca-app-pub-9024884895292195/1278831531"
 
-
-// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
-const adUnitId = TestIds.INTERSTITIAL ;
+const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : bannerId;
+// const adUnitId = TestIds.INTERSTITIAL ;
 
 
 const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
@@ -355,7 +355,7 @@ else{
       </ScrollView>
 
     </View>
-   { showAds === false &&
+   {/* { showAds === false &&
 <View style={{bottom:40,position:'absolute',alignSelf:'center'}}>
 
               <BannerAd 
@@ -368,7 +368,7 @@ else{
       />
 </View>
 
-    }
+    } */}
     </View>
     );
      

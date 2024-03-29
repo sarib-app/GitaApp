@@ -160,9 +160,9 @@ function handleavigator(){
       }
        style={AccountStyle.chapterInfo}>
        {
-        subscriptionData?
+        subscriptionData && PackageValid?
    <>
-        <Text style={AccountStyle.chapterTitle}>{subscriptionData?.pacakgeTaken}</Text>
+        <Text style={AccountStyle.chapterTitle}>👑 {subscriptionData?.pacakgeTaken.toUpperCase()}</Text>
         <Text style={AccountStyle.chapterDescription}>{Lang.AccountScreenTxt.SusbcriptionTxt3 + ":" + subscriptionData?.ExpDate}</Text>
 </>
 :<>
@@ -184,25 +184,25 @@ function handleavigator(){
       {/* You can map over your chapters data and render each chapter */}
       <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.nameTitle}</Text>
 
-      <View style={AccountStyle.chapterInfo}>
+      <View style={[AccountStyle.chapterInfo,{justifyContent:'center'}]}>
              
-             <Text style={AccountStyle.chapterTitle}>{user?.displayName}</Text>
-             <Text style={AccountStyle.chapterDescription}>{"Update Account name"}</Text>
+             <Text style={[AccountStyle.chapterTitle,{marginTop:0}]}>{user?.displayName}</Text>
+             {/* <Text style={AccountStyle.chapterDescription}>{"Update Account name"}</Text> */}
           
            </View>
 
 
            <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.EmailTitle}</Text>
 
-<View style={AccountStyle.chapterInfo}>
+<View style={[AccountStyle.chapterInfo,{justifyContent:'center'}]}>
        
-       <TextInput 
-       onChangeText={(e)=> setEmail(e)}
-       onEndEditing={()=>{ oldPassword != "null" &&
-        updateEmaill(email,oldPassword)
-       }}
-       style={AccountStyle.chapterTitle}>{user?.email}</TextInput>
-       <Text style={AccountStyle.chapterDescription}>{"Update Account Email"}</Text>
+       <Text 
+      //  onChangeText={(e)=> setEmail(e)}
+      //  onEndEditing={()=>{ oldPassword != "null" &&
+      //   updateEmaill(email,oldPassword)
+      //  }}
+      style={[AccountStyle.chapterTitle,{marginTop:0}]}>{user?.email}</Text>
+       {/* <Text style={AccountStyle.chapterDescription}>{"Update Account Email"}</Text> */}
     
      </View>
 
@@ -227,14 +227,14 @@ style={[AccountStyle.chapterInfo,{height:50}]}>
 }
 
 
-     <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.PaymentTitle}</Text>
+     {/* <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.PaymentTitle}</Text> */}
 
-<View style={AccountStyle.chapterInfo}>
+{/* <View style={AccountStyle.chapterInfo}>
        
        <Text style={AccountStyle.chapterTitle}>{Lang.AccountScreenTxt.PaymentTxt1} 1235</Text>
        <Text style={AccountStyle.chapterDescription}>{Lang.AccountScreenTxt.PaymentTxt2}</Text>
     
-     </View>
+     </View> */}
 
 
 

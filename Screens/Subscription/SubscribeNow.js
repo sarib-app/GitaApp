@@ -90,7 +90,7 @@ GetLangLocal()
     // Replace with the actual values for your payment
     const paymentDetails = {
       amount: data*100, // amount in the smallest currency unit
-      currency: 'usd',
+      currency: 'INR',
       paymentMethodType: 'card' // or any other payment method type you are using
     };
     
@@ -200,6 +200,7 @@ style={[SubscribeStyle.button]}>
 </TouchableOpacity>
 </Animated.View>
 <TouchableOpacity
+onPress={()=> navigation.navigate("BottomNavigation")}
 
 style={[SubscribeStyle.button,{backgroundColor:Colors.SecondaryDark}]}>
 <Text style={SubscribeStyle.buttonText}>
@@ -213,7 +214,7 @@ style={[SubscribeStyle.button,{backgroundColor:Colors.SecondaryDark}]}>
 
 
   return (
-    <StripeProvider publishableKey="pk_test_51NuBGvE9c1wXYOQO5qbYzDY0bxKYvT5647XaClqJH96aCgKEdwM1AP0UTfYDFOl0hwPP96W3Bi8UG1yL2LUyClKK00NjDLm6VO">
+    <StripeProvider publishableKey="pk_test_51OziOI2MMACePqpenESMGE1ng0IRRpd59nNLznSYyKEn5k6D0F9krBRbYx6AqNa7uJpzY36r1HZUpJTkQ2T83kB200LHksaZK6">
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {loading ? (
         <ActivityIndicator size="large" />
