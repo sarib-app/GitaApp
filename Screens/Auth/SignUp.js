@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, AuthStylesheet,Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, AuthStylesheet,Image, Alert, SafeAreaView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 import AuthStyles from './AuthStyles';
@@ -11,6 +11,8 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
+import * as Linking from 'expo-linking';
+
 const SignUpScreen = () => {
 const navigation = useNavigation()
 
@@ -98,7 +100,7 @@ GetLangLocal()
     }
     
   return (
-    <View style={AuthStyles.container}>
+    <SafeAreaView style={AuthStyles.container}>
     {/* Logo or image */}
     <View style={AuthStyles.logoContainer}>
       {/* Your logo or image */}
@@ -165,13 +167,16 @@ GetLangLocal()
       {/* <AntDesign name="google" size={24} color="white" /> */}
       <Text style={[AuthStyles.buttonText, { color: 'white' }]}>{Lang.RegisterScreenTxt.Button2Txt}</Text>
     </TouchableOpacity>
+    <Text 
+    onPress={()=>  Linking.openURL(`https://bhagavadgita-app.com/en/privacypolicy/`)}
+    style={{color:Colors.lightTxtClr,textDecorationLine:'underline'}}>{Lang.RegisterScreenTxt.PrivacyTxt}</Text>
 
     {/* Forgot Password and Sign Up */}
     {/* <View style={AuthStyles.footer}>
       <Text style={AuthStyles.footerText}>Forgot your password? Reset Password</Text>
       <Text style={AuthStyles.footerText}>Don't have an account? Sign Up</Text>
     </View> */}
-  </View>
+  </SafeAreaView>
   );
 };
 

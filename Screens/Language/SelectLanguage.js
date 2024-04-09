@@ -40,6 +40,7 @@ const focused= useIsFocused()
   }
   }
   GetLangLocal()
+  // AsyncStorage.clear()
   },[focused,SelectLang])
 async function SetTheLanguage(){
 

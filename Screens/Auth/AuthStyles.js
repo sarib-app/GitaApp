@@ -1,12 +1,12 @@
 import { View, TextInput, StyleSheet, TouchableOpacity, Text,Dimensions} from 'react-native';
 const WindowWidth = Dimensions.get('window').width
-const WindowHeight = Dimensions.get('screen').height; 
+const WindowHeight = Dimensions.get('window').height; 
 import { Colors } from '../../Global/Styling/Branding';
 const AuthStyles = StyleSheet.create({
     container: {
-        // flex: 1,
-        width:WindowWidth,
-        height:WindowHeight,
+        flex: 1,
+        // width:WindowWidth,
+        // height:WindowHeight,
         backgroundColor: Colors.MainBgColor,
         justifyContent: 'center',
         alignItems:'center'

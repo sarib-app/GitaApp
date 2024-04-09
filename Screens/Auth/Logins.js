@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, AuthStylesheet,Image, Alert, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, AuthStylesheet,Image, Alert, ScrollView, SafeAreaView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 import AuthStyles from './AuthStyles';
@@ -244,8 +244,8 @@ console.log(token)
     }
   
   return (
-    <View style={AuthStyles.container}>
-      <ScrollView>
+    <SafeAreaView style={AuthStyles.container}>
+      {/* <ScrollView> */}
 
     {/* Logo or image */}
     <View style={AuthStyles.logoContainer}>
@@ -317,9 +317,9 @@ style={AuthStyles.footerText}>{Lang.LoginTScreenxt.BottomTxt1}</Text>
 
       style={AuthStyles.footerText}>{Lang.LoginTScreenxt.BottomTxt2}</Text>
     </View>
-    </ScrollView>
+    {/* </ScrollView> */}
 
-  </View>
+  </SafeAreaView>
   );
 };
 

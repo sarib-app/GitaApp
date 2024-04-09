@@ -18,16 +18,16 @@ import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTab
 import { BannerAd, BannerAdSize, TestIds,InterstitialAd,AdEventType } from 'react-native-google-mobile-ads';
 
 
-const bannerId = Platform.OS === "ios" ? "ca-app-pub-9024884895292195/8810354119":"ca-app-pub-9024884895292195/1278831531"
+// const bannerId = Platform.OS === "ios" ? "ca-app-pub-9024884895292195/8810354119":"ca-app-pub-9024884895292195/1278831531"
 
-const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : bannerId;
+// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : bannerId;
 // const adUnitId = TestIds.INTERSTITIAL ;
 
 
-const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
-  requestNonPersonalizedAdsOnly: true,
-  keywords: ['fashion', 'clothing'],
-});
+// const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+//   requestNonPersonalizedAdsOnly: true,
+//   keywords: ['fashion', 'clothing'],
+// });
 
 
 
@@ -39,6 +39,7 @@ const [loaded, setLoaded] = useState(false);
   const [listData,setListData]=useState(BookEnglish)
   const [bookData,setBookData]=useState(BookEnglish)
   const [showAds,setShowAds]=useState(false)
+  const [searchTxt,setSearcTxt] = useState("")
 
   const [favListData,setFavListData]=useState([])
   const [favListTemp,setFavListTemp]=useState([])
@@ -88,17 +89,17 @@ GetData()
 
 
 
-  useEffect(() => {
-    const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
-      setLoaded(true);
-    });
+  // useEffect(() => {
+  //   const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+  //     setLoaded(true);
+  //   });
 
-    // Start loading the interstitial straight away
-    interstitial.load();
+  //   // Start loading the interstitial straight away
+  //   interstitial.load();
 
-    // Unsubscribe from events on unmount
-    return unsubscribe;
-  }, []);
+  //   // Unsubscribe from events on unmount
+  //   return unsubscribe;
+  // }, []);
 
 
 
@@ -206,6 +207,7 @@ if(ParsedFav){
   const data = selected === "All" ? listData : listData.filter(chapter => favListData.some(favChapter => favChapter.id === chapter.id));
 
  function onSearch(e) {
+  setSearcTxt(e)
   const searchText = e.toLowerCase(); // Convert the search text to lower case
   const datafortSearch = selected === "All" ? bookData : favListTemp
 
@@ -230,29 +232,29 @@ if(ParsedFav){
 
 
 function handleNaviagation(item){
-  if(showAds === true) {
+//   if(showAds === true) {
 
-  if(item.id != 1){
+//   if(item.id != 1){
 
-  if(loaded){
-    interstitial.show();
-    navigation.navigate("RenderBook",{item,selected})
+//   if(loaded){
+//     interstitial.show();
+//     navigation.navigate("RenderBook",{item,selected})
 
-  }
-  else{
+//   }
+//   else{
 
-    navigation.navigate("RenderBook",{item,selected})
-  }
-}
-else{
+//     navigation.navigate("RenderBook",{item,selected})
+//   }
+// }
+// else{
 
-  navigation.navigate("RenderBook",{item,selected})
-}
-}else{
-    navigation.navigate("RenderBook",{item,selected})
+//   navigation.navigate("RenderBook",{item,selected})
+// }
+// }else{
+//     navigation.navigate("RenderBook",{item,selected})
 
-}
-
+// }
+navigation.navigate("RenderBook",{item,selected,searchTxt})
 }
 
 

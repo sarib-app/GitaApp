@@ -45,6 +45,7 @@ BottomTxt2:"Don't have an account? Sign Up"
     RegisterScreenTxt:{
         Button1Txt:"Sign Up",
         Button2Txt:"Back",
+        PrivacyTxt:"By signing up you agree to our Privacy Policy"
     },
     SettingScreenTxt:{
         Button1Txt:"Log Out",
@@ -108,7 +109,9 @@ const Hindi = {
     },
     "RegisterScreenTxt": {
       "Button1Txt": "साइन अप करें",
-      "Button2Txt": "वापस"
+      "Button2Txt": "वापस",
+      "PrivacyTxt":"साइन अप करके आप हमारी गोपनीयता नीति से सहमत होते हैं।"
+
     },
     "SettingScreenTxt": {
       "Button1Txt": "लॉग आउट करें"
@@ -174,7 +177,9 @@ const Hindi = {
     },
     "RegisterScreenTxt": {
       "Button1Txt": "સાઇન અપ કરો",
-      "Button2Txt": "પાછા જાઓ"
+      "Button2Txt": "પાછા જાઓ",
+      "PrivacyTxt":"સાઇન અપ કરીને તમે અમારી ગોપનીયતા નીતિને માન્ય કરો છો."
+
     },
     "SettingScreenTxt": {
       "Button1Txt": "લૉગ આઉટ કરો"

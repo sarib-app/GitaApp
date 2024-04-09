@@ -60,6 +60,11 @@ GetLangLocal()
   Linking.openURL(`https://bhagavadgita-app.com/${param}/contactus/`);
 
   }
+  function PrivacyLinker(){
+    Linking.openURL(`https://bhagavadgita-app.com/${param}/privacypolicy/`);
+  
+    }
+    
   
 
 const navigation= useNavigation()
@@ -69,12 +74,18 @@ const navigation= useNavigation()
          
               <TouchableOpacity 
               onPress={()=> {
-                if(item.routeTo != "contactUs"){
+                if(item.routeTo == "contactUs"){
 
-                  navigation.navigate(item.routeTo)
+                  // navigation.navigate(item.routeTo)
+                  ContactLinker()
+                }
+                else if(item.routeTo == "PrivacyPolicyScreen"){
+                  PrivacyLinker()
                 }
                 else{
-                  ContactLinker()
+                  // ContactLinker()
+                  navigation.navigate(item.routeTo)
+
                 }
                 
                 }

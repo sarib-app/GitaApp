@@ -28,7 +28,9 @@ const adUnitId = __DEV__ ? TestIds.BANNER : bannerId;
 
 const RenderBook = ({route}) => {
     const { item } = route.params;
+    
     const { selected } = route.params;
+    const { searchTxt } = route.params;
     const [bookData,setBookData]=useState(BookEnglish)
     const [showAds,setShowAds]=useState(false)
 
@@ -145,6 +147,29 @@ function ChapterContent({item}){
     }
   
   }
+
+
+  function highlightSearchTerm(text) {
+    if (!searchTxt) return text;
+    
+    const parts = text.split(new RegExp(`(${searchTxt})`, 'gi'));
+    
+    return (
+      <>
+        {parts.map((part, index) => (
+          part.toLowerCase() === searchTxt.toLowerCase() ? (
+            <Text key={index} style={{color:Colors.PrimaryColor}}>
+              {part}
+            </Text>
+          ) : (
+            <Text key={index} style={{color:Colors.lightTxtClr}}>
+              {part}
+            </Text>
+          )
+        ))}
+      </>
+    );
+  }
   
         return(
             // <View style={HomeStyles.chapterContainer}>
@@ -161,20 +186,22 @@ function ChapterContent({item}){
                     <Text style={{color:Colors.PrimaryColor}}>
                     Verse {item.verse_number}:  
                         </Text>
-                    {" "+item.text.original}
+             
+                    {highlightSearchTerm(" " + item.text.original)}
                 </Text>
                 <Text style={{fontSize:20,color:Colors.lightTxtClr,fontWeight:'bold',marginBottom:10}}>
                     <Text style={{color:Colors.PrimaryColor}}>
                     Meaning:  
                         </Text>
-                    {" "+item.text.translation}
+                        {highlightSearchTerm(" " + item.text.translation)}
                 </Text>
-
+               
                 <Text style={{fontSize:20,color:Colors.lightTxtClr,fontWeight:'bold',marginBottom:10}}>
                     <Text style={{color:Colors.PrimaryColor}}>
                     Details:  
                         </Text>
-                    {" "+item.commentary}
+                    {/* {" "+item.commentary} */}
+                    {highlightSearchTerm(" " + item.commentary)}
                 </Text>
       
               </View>
