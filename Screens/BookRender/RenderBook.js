@@ -191,18 +191,18 @@ function ChapterContent({item}){
                 </Text>
                 <Text style={{fontSize:20,color:Colors.lightTxtClr,fontWeight:'bold',marginBottom:10}}>
                     <Text style={{color:Colors.PrimaryColor}}>
-                    Meaning:  
+                    Translation:  
                         </Text>
                         {highlightSearchTerm(" " + item.text.translation)}
                 </Text>
                
-                <Text style={{fontSize:20,color:Colors.lightTxtClr,fontWeight:'bold',marginBottom:10}}>
+                {/* <Text style={{fontSize:20,color:Colors.lightTxtClr,fontWeight:'bold',marginBottom:10}}> 
                     <Text style={{color:Colors.PrimaryColor}}>
-                    Details:  
+                    Commentary:  
                         </Text>
-                    {/* {" "+item.commentary} */}
+                     {" "+item.commentary}
                     {highlightSearchTerm(" " + item.commentary)}
-                </Text>
+                </Text> */}
       
               </View>
               {

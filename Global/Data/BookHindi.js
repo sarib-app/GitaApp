@@ -1,7 +1,8 @@
 const BookHindi = [
   {
     "id": 1,
-    "Title": "Chapter 1",
+    "Title": "अर्जुन विषाद योग",
+    "Subtitle": "युद्ध के परिणाम पर शोक प्रकट करना",
     "verses": [
       {
         "verse_number": 1,
@@ -336,7 +337,8 @@ const BookHindi = [
   },
   {
     "id": 2,
-    "Title": "Chapter 2",
+    "Title": "कर्मयोग",
+    "Subtitle": "कर्म का विज्ञान",
     "verses": [
       {
         "verse_number": 1,
@@ -846,7 +848,8 @@ const BookHindi = [
   },
   {
     "id": 3,
-    "Title": "Chapter 3",
+    "Title": "कर्मयोग",
+    "Subtitle": "कर्म का विज्ञान",
     "verses": [
       {
         "verse_number": 1,
@@ -1153,7 +1156,8 @@ const BookHindi = [
   },
   {
     "id": 4,
-    "Title": "Chapter 4",
+    "Title": "ज्ञान कर्म संन्यास योग",
+    "Subtitle": "ज्ञान का योग और कर्म का अनुशासन",
     "verses": [
       {
         "verse_number": 1,
@@ -1453,7 +1457,8 @@ const BookHindi = [
   },
   {
     "id": 5,
-    "Title": "Chapter 5",
+    "Title": "कर्म संन्यास योग",
+    "Subtitle": "वैराग्य का योग",
     "verses": [
       {
         "verse_number": 1,
@@ -1662,7 +1667,8 @@ const BookHindi = [
   },
   {
     "id": 6,
-    "Title": "Chapter 6",
+    "Title": "ध्यानयोग",
+    "Subtitle": "ध्यान का योग",
     "verses": [
       {
         "verse_number": 1,
@@ -1997,7 +2003,8 @@ const BookHindi = [
   },
   {
     "id": 7,
-    "Title": "Chapter 7",
+    "Title": "ज्ञान विज्ञान योग",
+    "Subtitle": "दिव्य ज्ञान की अनुभूति द्वारा प्राप्त योग",
     "verses": [
       {
         "verse_number": 1,
@@ -2213,7 +2220,8 @@ const BookHindi = [
   },
   {
     "id": 8,
-    "Title": "Chapter 8",
+    "Title": "अक्षर ब्रह्म योग",
+    "Subtitle": "अविनाशी भगवान का योग",
     "verses": [
       {
         "verse_number": 1,
@@ -2415,7 +2423,8 @@ const BookHindi = [
   },
   {
     "id": 9,
-    "Title": "Chapter 9",
+    "Title": "राज विद्या योग",
+    "Subtitle": "राज विद्या द्वारा योग",
     "verses": [
       {
         "verse_number": 1,
@@ -2659,7 +2668,8 @@ const BookHindi = [
   },
   {
     "id": 10,
-    "Title": "Chapter 10",
+    "Title": "विभूति योग",
+    "Subtitle": "भगवान के अनन्त वैभवों की स्तुति द्वारा प्राप्त योग",
     "verses": [
       {
         "verse_number": 1,
@@ -2959,7 +2969,8 @@ const BookHindi = [
   },
   {
     "id": 11,
-    "Title": "Chapter 11",
+    "Title": "विश्वरूप दर्शन योग",
+    "Subtitle": "भगवान के विराट रूप के दर्शन का योग",
     "verses": [
       {
         "verse_number": 1,
@@ -3350,7 +3361,8 @@ const BookHindi = [
   },
   {
     "id": 12,
-    "Title": "Chapter 12",
+    "Title": "भक्तियोग",
+    "Subtitle": "भक्ति का विज्ञान",
     "verses": [
       {
         "verse_number": 1,
@@ -3496,7 +3508,8 @@ const BookHindi = [
   },
   {
     "id": 13,
-    "Title": "Chapter 13",
+    "Title": "क्षेत्र क्षेत्रज्ञ विभाग योग",
+    "Subtitle": "योग द्वारा क्षेत्र और क्षेत्र के ज्ञाता के विभेद को जानना",
     "verses": [
       {
         "verse_number": 1,
@@ -3747,7 +3760,8 @@ const BookHindi = [
   },
   {
     "id": 14,
-    "Title": "Chapter 14",
+    "Title": "गुण त्रय विभाग योग",
+    "Subtitle": "प्राकृतिक शक्ति के तीन गुणों द्वारा योग का ज्ञान",
     "verses": [
       {
         "verse_number": 1,
@@ -3942,7 +3956,8 @@ const BookHindi = [
   },
   {
     "id": 15,
-    "Title": "Chapter 15",
+    "Title": "पुरुषोत्तम योग",
+    "Subtitle": "सर्वोच्च दिव्य स्वरूप योग",
     "verses": [
       {
         "verse_number": 1,
@@ -4088,7 +4103,8 @@ const BookHindi = [
   },
   {
     "id": 16,
-    "Title": "Chapter 16",
+    "Title": " देवासुर संपद विभाग योग",
+    "Subtitle": "दैवीय और आसुरी प्रकृति में भेद द्वारा योग का ज्ञान",
     "verses": [
       {
         "verse_number": 1,
@@ -4262,7 +4278,8 @@ const BookHindi = [
   },
   {
     "id": 17,
-    "Title": "Chapter 17",
+    "Title": "श्रद्धा त्रय विभाग योग",
+    "Subtitle": "श्रद्धा के तीन विभागों को समझते हुए योग का अनुसरण करना",
     "verses": [
       {
         "verse_number": 1,
@@ -4464,7 +4481,8 @@ const BookHindi = [
   },
   {
     "id": 18,
-    "Title": "Chapter 18",
+    "Title": "मोक्ष संन्यास योग",
+    "Subtitle": "संन्यास में पूर्णता और शरणागति के माध्यम से योग",
     "verses": [
       {
         "verse_number": 1,

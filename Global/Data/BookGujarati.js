@@ -1,7 +1,8 @@
 const BookGujarati = [
   {
     "id": 1,
-    "Title": "Chapter 1",
+    "Title": "અર્જુન વિષાદ યોગ",
+    "Subtitle": "યુદ્ધના પરિણામો અંગે શોકની અભિવ્યક્તિ",
     "verses": [
       {
         "verse_number": 1,
@@ -336,7 +337,8 @@ const BookGujarati = [
   },
   {
     "id": 2,
-    "Title": "Chapter 2",
+    "Title": "સાઙ્ખ્યયોગ",
+    "Subtitle": "વિશ્લેષણાત્મક જ્ઞાનનો યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -846,7 +848,8 @@ const BookGujarati = [
   },
   {
     "id": 3,
-    "Title": "Chapter 3",
+    "Title": "કર્મયોગ",
+    "Subtitle": "કર્મનો યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -1153,7 +1156,8 @@ const BookGujarati = [
   },
   {
     "id": 4,
-    "Title": "Chapter 4",
+    "Title": "જ્ઞાન કર્મ સંન્યાસ યોગ",
+    "Subtitle": "જ્ઞાનનો યોગ અને કર્મનું અનુશાસન",
     "verses": [
       {
         "verse_number": 1,
@@ -1453,7 +1457,8 @@ const BookGujarati = [
   },
   {
     "id": 5,
-    "Title": "Chapter 5",
+    "Title": "કર્મ સંન્યાસ યોગ",
+    "Subtitle": "વૈરાગ્યનો યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -1662,7 +1667,8 @@ const BookGujarati = [
   },
   {
     "id": 6,
-    "Title": "Chapter 6",
+    "Title": "ધ્યાન યોગ",
+    "Subtitle": "ધ્યાનનો યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -1997,7 +2003,8 @@ const BookGujarati = [
   },
   {
     "id": 7,
-    "Title": "Chapter 7",
+    "Title": "જ્ઞાન વિજ્ઞાન યોગ",
+    "Subtitle": "દિવ્ય જ્ઞાનની અનુભૂતિ દ્વારા યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -2213,7 +2220,8 @@ const BookGujarati = [
   },
   {
     "id": 8,
-    "Title": "Chapter 8",
+    "Title": "અક્ષર બ્રહ્મ યોગ",
+    "Subtitle": "શાશ્વત ભગવાનનો યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -2415,7 +2423,8 @@ const BookGujarati = [
   },
   {
     "id": 9,
-    "Title": "Chapter 9",
+    "Title": "રાજ વિદ્યા યોગ",
+    "Subtitle": "રાજ વિદ્યા દ્વારા યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -2659,7 +2668,8 @@ const BookGujarati = [
   },
   {
     "id": 10,
-    "Title": "Chapter 10",
+    "Title": "વિભૂતિ યોગ",
+    "Subtitle": "ભગવાનના અનંત ઐશ્વર્યોની પ્રશસ્તિ દ્વારા યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -2959,7 +2969,8 @@ const BookGujarati = [
   },
   {
     "id": 11,
-    "Title": "Chapter 11",
+    "Title": "વિશ્વરૂપ દર્શન યોગ",
+    "Subtitle": "ભગવાનના વૈશ્વિકરૂપના દર્શન દ્વારા યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -3350,7 +3361,8 @@ const BookGujarati = [
   },
   {
     "id": 12,
-    "Title": "Chapter 12",
+    "Title": "ભક્તિ યોગ",
+    "Subtitle": "ભક્તિનો યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -3496,7 +3508,8 @@ const BookGujarati = [
   },
   {
     "id": 13,
-    "Title": "Chapter 13",
+    "Title": "ક્ષેત્ર ક્ષેત્રજ્ઞ વિભાગ યોગ",
+    "Subtitle": "ક્ષેત્ર તથા ક્ષેત્રના જ્ઞાતા વચ્ચેના ભેદદર્શન દ્વારા યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -3747,7 +3760,8 @@ const BookGujarati = [
   },
   {
     "id": 14,
-    "Title": "Chapter 14",
+    "Title": "ગુણ ત્રય વિભાગ યોગ",
+    "Subtitle": "માયિક પ્રકૃતિના ત્રણ ગુણોના જ્ઞાન દ્વારા યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -3942,7 +3956,8 @@ const BookGujarati = [
   },
   {
     "id": 15,
-    "Title": "Chapter 15",
+    "Title": "પુરુષોત્તમ યોગ",
+    "Subtitle": "પૂર્ણ પુરુષોત્તમ દિવ્ય વિભૂતિ યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -4088,7 +4103,8 @@ const BookGujarati = [
   },
   {
     "id": 16,
-    "Title": "Chapter 16",
+    "Title": "દ્વૈવાસુર સંપદ વિભાગ યોગ",
+    "Subtitle": "દૈવી તથા આસુરી પ્રકૃતિના વિવેક દ્વારા યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -4262,7 +4278,8 @@ const BookGujarati = [
   },
   {
     "id": 17,
-    "Title": "Chapter 17",
+    "Title": "શ્રદ્ધા ત્રય વિભાગ યોગ",
+    "Subtitle": "શ્રદ્ધાના ત્રણ વિભાગોના જ્ઞાન દ્વારા યોગ",
     "verses": [
       {
         "verse_number": 1,
@@ -4464,7 +4481,8 @@ const BookGujarati = [
   },
   {
     "id": 18,
-    "Title": "Chapter 18",
+    "Title": "મોક્ષ સંન્યાસ યોગ",
+    "Subtitle": "સંન્યાસમાં પૂર્ણતા અને શરણાગતિ દ્વારા યોગ",
     "verses": [
       {
         "verse_number": 1,
