@@ -214,7 +214,7 @@ style={[SubscribeStyle.button,{backgroundColor:Colors.SecondaryDark}]}>
 
 
   return (
-    <StripeProvider publishableKey="pk_test_51OziOI2MMACePqpenESMGE1ng0IRRpd59nNLznSYyKEn5k6D0F9krBRbYx6AqNa7uJpzY36r1HZUpJTkQ2T83kB200LHksaZK6">
+    <StripeProvider publishableKey="pk_live_51OziOI2MMACePqpeJNbmoX8XEs1RmHnz4TD6IgE3qzc5zrBoUwzCT4gNcsWguvGJ0MMqFpEN57FWcD5eqm5N4xG700r1Xp4fRB">
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {loading ? (
         <ActivityIndicator size="large" />
