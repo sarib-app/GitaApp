@@ -337,7 +337,7 @@ const BookHindi = [
   },
   {
     "id": 2,
-    "Title": "कर्मयोग",
+    "Title": "सांख्य योग",
     "Subtitle": "कर्म का विज्ञान",
     "verses": [
       {
