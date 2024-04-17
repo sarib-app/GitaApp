@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet,TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet,TouchableOpacity, Alert,SafeAreaView } from 'react-native';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +14,7 @@ import updateEmaill from '../../Components/GlobalCalls/UpdateEmail';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
 import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTableData';
+import GoBack from '../../Global/Styling/BackButton';
 
 
 const AccountScreen = () => {
@@ -144,10 +145,19 @@ function handleavigator(){
 }
 
   return (
-    <View style={GlobalStyles.container}>
+    <SafeAreaView style={GlobalStyles.container}>
+   
+  
+      {/* <GoBack/> */}
+   
       {/* Title */}
     <View style={AccountStyle.container}>
+    <View
+      style={{}}
+      >
 
+      <GoBack/>
+      </View>
       <Text style={AccountStyle.title}>Accounts</Text>
       <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.SubscriptionTitle}</Text>
 
@@ -240,7 +250,7 @@ style={[AccountStyle.chapterInfo,{height:50}]}>
 
     </View>
 
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -20,6 +20,7 @@ import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 // import { GoogleAuthProvider } from "firebase/auth";
 import {  signInWithPopup } from "firebase/auth";
+import GoBack from '../../Global/Styling/BackButton';
 
 // Create a new instance of GoogleAuthProvider
 const provider = new GoogleAuthProvider();
@@ -246,6 +247,12 @@ console.log(token)
   return (
     <SafeAreaView style={AuthStyles.container}>
       {/* <ScrollView> */}
+      <View
+      style={{alignSelf:'flex-start',marginLeft:20}}
+      >
+
+      <GoBack/>
+      </View>
 
     {/* Logo or image */}
     <View style={AuthStyles.logoContainer}>

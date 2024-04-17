@@ -14,9 +14,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import GoBack from '../../Global/Styling/BackButton';
 const SelectLanguage = () => {
   const navigation = useNavigation()
 const [SelectLang,setSelectLang] = useState("English") 
+const [selection,setSelection]=useState(null)
 
 const [Lang,setLang]=useState(Eng)
 const focused= useIsFocused()
@@ -25,6 +27,7 @@ const focused= useIsFocused()
   const selection = await AsyncStorage.getItem("selectedLang")
   if(selection){
     setSelectLang(selection)
+    setSelection(selection)
     if(selection === "English"){
       setLang(Eng)
     }
@@ -43,18 +46,28 @@ const focused= useIsFocused()
   // AsyncStorage.clear()
   },[focused,SelectLang])
 async function SetTheLanguage(){
+ 
+  
+  await AsyncStorage.setItem("selectedLang",SelectLang)
+ 
 
-   await AsyncStorage.setItem("selectedLang",SelectLang)
-    const getUser = await AsyncStorage.getItem("user")
-    const user= JSON.parse(getUser)
-    if (user) {
+  if(selection){
     navigation.goBack()
-    console.log("user",user)
-    } else {
-    navigation.navigate('Login')
-    // console.log("unot ser","getUser")
+  }
+  
+  else {
+    navigation.navigate("BottomNavigation");
+  }
+  //   const getUser = await AsyncStorage.getItem("user")
+  //   const user= JSON.parse(getUser)
+  //   if (user) {
+  //   navigation.goBack()
+  //   console.log("user",user)
+  //   } else {
+  //   navigation.navigate('Login')
+  //   // console.log("unot ser","getUser")
 
-    }
+  //   }
     // onAuthStateChanged(auth, (user) => {
     // });
 
@@ -81,8 +94,10 @@ style={[Language.button,{backgroundColor:item.title === SelectLang ? Colors.ligh
 
   return (
     <SafeAreaView style={[GlobalStyles.container,{alignItems:'center'}]}>
+      
       {/* Title */}
     <View style={HomeStyles.container}>
+      <GoBack/>
 
       <Text style={[HomeStyles.title,{marginTop:20}]}>{Lang.LanguageScreenTxt.Title}</Text>
 

@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
+import GoBack from '../../Global/Styling/BackButton';
 
 const SignUpScreen = () => {
 const navigation = useNavigation()
@@ -101,6 +102,12 @@ GetLangLocal()
     
   return (
     <SafeAreaView style={AuthStyles.container}>
+       <View
+      style={{alignSelf:'flex-start',marginLeft:20}}
+      >
+
+      <GoBack/>
+      </View>
     {/* Logo or image */}
     <View style={AuthStyles.logoContainer}>
       {/* Your logo or image */}

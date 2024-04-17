@@ -5,6 +5,7 @@ import styles from './Styles';
 import { useIsFocused } from '@react-navigation/native';
 import { TermsEnglish,TermsGujarati,TermsHindi } from '../../Global/Data/AppContentTxt';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import GoBack from '../../Global/Styling/BackButton';
 
 const TermsConditionsScreen = () => {
 
@@ -42,6 +43,12 @@ const TermsConditionsScreen = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: '#000' }]}>
+        <View
+      style={{alignSelf:'flex-start',marginLeft:20,marginTop:50}}
+      >
+
+      <GoBack/>
+      </View>
            <ScrollView
         contentContainerStyle={{alignItems:'center'}}
         >

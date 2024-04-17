@@ -21,7 +21,10 @@ import removeFromFavorites from './RemoveFav';
 import fetchFavorites from './fetchFav';
 import { BannerAd, BannerAdSize, TestIds, } from 'react-native-google-mobile-ads';
 import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTableData';
+import { Ionicons } from '@expo/vector-icons';
+
 import { ScrollView } from 'react-native-gesture-handler';
+import GoBack from '../../Global/Styling/BackButton';
 const bannerId = Platform.OS === "ios" ? "ca-app-pub-9024884895292195/3410170858":"ca-app-pub-9024884895292195/6048078531"
 const adUnitId = __DEV__ ? TestIds.BANNER : bannerId;
 // const adUnitId = TestIds.INTERSTITIAL ;
@@ -230,7 +233,7 @@ showAds === true &&
     <View style={GlobalStyles.container}>
       {/* Title */}
     <View style={HomeStyles.container}>
-
+     <GoBack/>
       <Text style={[HomeStyles.title,{marginBottom:5,fontSize:23}]}>Chapter {item.Title}</Text>
 
       <ScrollView>

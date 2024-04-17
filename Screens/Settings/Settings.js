@@ -17,10 +17,13 @@ const Settings = () => {
   const [Lang,setLang]=useState(Eng)
   const [listData,setListData]=useState(SettingOptions)
   const [param,setparamm]=useState("en")
+  const [user,setUser]=useState(null)
+
 
   const focused= useIsFocused()
   useEffect(()=>{
   async function GetLangLocal(){
+   
   const selection = await AsyncStorage.getItem("selectedLang")
 
   if(selection){
@@ -53,8 +56,16 @@ setListData(SettingOptionsMarathi)
   }
 }
 GetLangLocal()
+checkLoginUser()
 
   },[focused])
+  async function checkLoginUser(){
+    const getUser = await AsyncStorage.getItem("user")
+    const user= JSON.parse(getUser)
+    if(user){
+      setUser(user)
+    }
+  }
 
   function ContactLinker(){
   Linking.openURL(`https://bhagavadgita-app.com/${param}/contactus/`);
@@ -64,7 +75,14 @@ GetLangLocal()
     Linking.openURL(`https://bhagavadgita-app.com/${param}/privacypolicy/`);
   
     }
-    
+    function checkLogin(){
+if(user!==null){
+  navigation.navigate("AccountScreen")
+}
+else{
+  navigation.navigate("Login")
+}
+    }
   
 
 const navigation= useNavigation()
@@ -81,6 +99,9 @@ const navigation= useNavigation()
                 }
                 else if(item.routeTo == "PrivacyPolicyScreen"){
                   PrivacyLinker()
+                }
+                else if(item.routeTo == "AccountScreen"){
+                  checkLogin()
                 }
                 else{
                   // ContactLinker()
@@ -120,15 +141,21 @@ const navigation= useNavigation()
         }
         }
       />
+      {
+        user != null &&
       <TouchableOpacity
 onPress={()=>{
   AsyncStorage.clear()
-  navigation.navigate("Login")}}
+  setUser(null)
+
+}}
 style={[AuthStyles.button,{marginTop:20}]}>
 <Text style={AuthStyles.buttonText}>
     {Lang.SettingScreenTxt.Button1Txt}
 </Text>
 </TouchableOpacity>
+      }
+
 
 </ScrollView>
 

@@ -4,6 +4,7 @@ import styles from './Styles';
 import { useIsFocused } from '@react-navigation/native';
 import { AboutEnglish,AboutGujarati,AboutHindi,AboutMarathi } from '../../Global/Data/AppContentTxt';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import GoBack from '../../Global/Styling/BackButton';
 const AboutUsScreen = () => {
 
 
@@ -36,6 +37,12 @@ GetLangLocal()
   },[focused])
   return (
     <View style={[styles.container, { backgroundColor: '#000' }]}>
+       <View
+      style={{alignSelf:'flex-start',marginLeft:20,marginTop:50}}
+      >
+
+      <GoBack/>
+      </View>
       <Text style={styles.heading}>About Us</Text>
       <Text style={styles.content}>
        {Lang}

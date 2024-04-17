@@ -41,12 +41,10 @@ async function GetAsyncData(){
 
   const selection = await AsyncStorage.getItem("selectedLang")
 
-  if(user && selection){
+  if(selection){
     setInitialRoute("BottomNavigation")
   }
-  else if(!user && selection){
-    setInitialRoute("Login")
-  }
+  
   else {
     setInitialRoute("SelectLanguage")
   }

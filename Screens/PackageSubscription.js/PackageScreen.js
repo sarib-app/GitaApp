@@ -12,6 +12,7 @@ import { Eng, Gujrati,Hindi} from '../../Global/Data/Language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import hands from '../../assets/Imgs/hands.png'
+import GoBack from '../../Global/Styling/BackButton';
 const PackageScreen = () => {
 const [SelectLang,setSelectLang] = useState("English")
 const [Lang,setLang]=useState(Eng)
@@ -108,10 +109,15 @@ function ScreenUi(){
 
   return (
     <View style={[GlobalStyles.container,{alignItems:'center'}]}>
+ <View
+      style={{alignSelf:'flex-start',marginLeft:20,marginTop:50}}
+      >
 
+      <GoBack/>
+      </View>
 <Image 
 source={hands}
-style={{height:250,width:250,marginTop:100}}
+style={{height:250,width:250,marginTop:80}}
 />
 
 <Animated.View style={[{alignItems:'center'}, { transform: [{ scale: bounceValue }] }]}>

@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
 import { handleForgotPassword } from '../../Components/GlobalCalls/handleForgetPassword';
+import GoBack from '../../Global/Styling/BackButton';
 const ForgetPassword = () => {
 const navigation = useNavigation()
 
@@ -50,6 +51,12 @@ GetLangLocal()
     
   return (
     <View style={AuthStyles.container}>
+       {/* <View
+      style={{alignSelf:'flex-start',marginLeft:20}}
+      >
+
+      <GoBack/>
+      </View> */}
     {/* Logo or image */}
     <View style={AuthStyles.logoContainer}>
       {/* Your logo or image */}
