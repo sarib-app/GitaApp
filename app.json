@@ -37,8 +37,11 @@
       }
     },
 
+
+
     "plugins": ["expo-apple-authentication"],
 
+    
     "scheme": "com.app.gitapp",
     "owner": "karanvani"
   },
