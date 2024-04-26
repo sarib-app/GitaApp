@@ -52,11 +52,6 @@ GetLangLocal()
 
   },[focused])
  
-
-
-
-
-
   const bounceValue = new Animated.Value(1);
 
     // Bouncing animation effect
@@ -79,10 +74,6 @@ GetLangLocal()
   
     // Call the bouncing animation function
     startBouncing();
-
-
-
-
 
   const fetchPaymentIntentClientSecret = async () => {
     setLoading(true);
