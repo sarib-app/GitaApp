@@ -36,6 +36,7 @@
         "projectId": "7bd81753-6653-44b2-8d9c-277a5aa53cdb"
       }
     },
+    "plugins": ["expo-apple-authentication"],
     "scheme": "com.app.gitapp",
     "owner": "karanvani"
   },

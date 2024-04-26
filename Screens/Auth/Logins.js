@@ -131,7 +131,9 @@ async function loginWithApple(){
     LoginFirebaseApple(credential.identityToken)
     // signed in
   } catch (e) {
+    console.log(e)
     if (e.code === 'ERR_REQUEST_CANCELED') {
+      
       // handle that the user canceled the sign-in flow
     } else {
       // handle other errors

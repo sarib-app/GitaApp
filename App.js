@@ -36,8 +36,8 @@ useEffect(()=>{
   GetAsyncData()
 })
 async function GetAsyncData(){
-  const getUser = await AsyncStorage.getItem("user")
-  const user= JSON.parse(getUser)
+  // const getUser = await AsyncStorage.getItem("user")
+  // const user= JSON.parse(getUser)
 
   const selection = await AsyncStorage.getItem("selectedLang")
 
