@@ -3,33 +3,15 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity,FlatList ,Alert, Pl
 import HomeStyles from './HomeStyles';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
-// import { FlatList } from 'react-native-gesture-handler';
-import { ChapterListData } from '../../Global/Data/Data';
 import { Eng, Gujrati,Hindi, Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { BookGujarati } from '../../Global/Data/BookGujarati';
 import { BookEnglish } from '../../Global/Data/BookEnglish';
 import { BookHindi } from '../../Global/Data/BookHindi';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTableData';
-import { BannerAd, BannerAdSize, TestIds,InterstitialAd,AdEventType } from 'react-native-google-mobile-ads';
-
-
-// const bannerId = Platform.OS === "ios" ? "ca-app-pub-9024884895292195/8810354119":"ca-app-pub-9024884895292195/1278831531"
-
-// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : bannerId;
-// const adUnitId = TestIds.INTERSTITIAL ;
-
-
-// const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
-//   requestNonPersonalizedAdsOnly: true,
-//   keywords: ['fashion', 'clothing'],
-// });
-
-
 
 const HomeScreen = () => {
 const navigation =useNavigation()
@@ -48,10 +30,6 @@ const [loaded, setLoaded] = useState(false);
 
 const focused= useIsFocused()
 
-// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'your-ad-unit-id';
-// const adUnitId = TestIds.INTERSTITIAL ;
-
-// const interstitialAd = InterstitialAd.createForAdRequest(adUnitId);
   useEffect(()=>{
 async function GetLangLocal(){
   const selection = await AsyncStorage.getItem("selectedLang")
@@ -87,59 +65,6 @@ GetFav()
 GetData()
   },[focused])
 
-
-
-  // useEffect(() => {
-  //   const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
-  //     setLoaded(true);
-  //   });
-
-  //   // Start loading the interstitial straight away
-  //   interstitial.load();
-
-  //   // Unsubscribe from events on unmount
-  //   return unsubscribe;
-  // }, []);
-
-
-
-
-
-
-
-
-  // useEffect(() => {
-  //   const eventListener = interstitialAd.onAdEvent((type) => {
-  //     if (type === AdEventType.LOADED) {
-  //       // Ad is ready to be displayed, wait for the user to navigate
-  //     } else if (type === AdEventType.ERROR) {
-  //       // Handle the error here if needed
-  //     } else if (type === AdEventType.CLOSED) {
-  //       // Resume to Screen B after the ad has been closed
-  //       navigation.navigate('RenderBook');
-  //     }
-  //   });
-
-  //   // Start loading the ad
-  //   interstitialAd.load();
-
-  //   // Unsubscribe from events on cleanup
-  //   return () => {
-  //     eventListener();
-  //   };
-  // }, []);
-
-
-  // const handleNavigateToScreenB = () => {
-  //   if (interstitialAd.loaded) {
-  //     interstitialAd.show();
-  //   } else {
-  //     // Navigate to Screen B if the ad is not ready
-  //     navigation.navigate('RenderBook');
-  //   }
-  // };
-
-
   async function GetData(){
 
     const userData = await AsyncStorage.getItem("user")
@@ -149,8 +74,6 @@ GetData()
    
    
   }
-  
-
 
   const today = new Date()
   const fetchSubscriptionData = async (userUid) => {
@@ -187,14 +110,6 @@ GetData()
     }
   };
   
-
-
-
-
-
-
-
-
  async function GetFav(){
     const favorites = await AsyncStorage.getItem('favorites');
 const ParsedFav = JSON.parse(favorites)
