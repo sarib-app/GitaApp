@@ -83,7 +83,8 @@ const HomeStyles = StyleSheet.create({
     chapterTitle: {
         fontSize: 17,
         color: 'white',
-        marginTop: 7, marginLeft: 5
+        // marginTop: 14,
+        marginLeft: 5
     },
     chapterDescription: {
         color: '#808080',

@@ -31,7 +31,7 @@ ContentContainer:{
         marginLeft: 10,
         color:Colors.lightTxtClr
       },
-      SimpleTxt:{color:Colors.lightTxtClr,textAlign:'center',marginTop:10,fontSize:15},
+      SimpleTxt:{color:Colors.lightTxtClr,textAlign:'center',marginTop:10,fontSize:18,width:"90%"},
 
       bigButton: {
         flexDirection: 'row',

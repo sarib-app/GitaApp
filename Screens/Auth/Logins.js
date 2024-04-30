@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, AuthStylesheet,Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, AuthStylesheet,Image, Alert, ScrollView, SafeAreaView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 import AuthStyles from './AuthStyles';
@@ -18,7 +18,18 @@ import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
+// import { GoogleAuthProvider } from "firebase/auth";
+import {  signInWithPopup } from "firebase/auth";
+import GoBack from '../../Global/Styling/BackButton';
 
+// Create a new instance of GoogleAuthProvider
+const provider = new GoogleAuthProvider();
+
+// Add scope and custom parameters if needed
+provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+provider.setCustomParameters({
+  'login_hint': 'user@example.com'
+});
 WebBrowser.maybeCompleteAuthSession();
 const LoginScreen = () => {
 const navigation = useNavigation()
@@ -28,23 +39,16 @@ const [Email, setEmail] = useState('');
   const [EmailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("nothing yet");
-
-  const [responseField, setErrosetResponseField] = useState(false);
-  const [uid,setUid]=useState()
-
   const [Lang,setLang]=useState(Eng)
-
-
   const focused= useIsFocused()
-
   const [accessToken, setAccessToken] = React.useState();
   const [userInfo, setUserInfo] = React.useState();
-  const [message, setMessage] = React.useState(); 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: "420870778500-ibesf7i06pgu82j7tp5rjqrtu2h66ioo.apps.googleusercontent.com",
+    androidClientId: "420870778500-j6osd5lrhs1eimffc9cdj1hmrdd9hfec.apps.googleusercontent.com",
     iosClientId: "420870778500-bjdvpr3127ve30dhi0bsloib2g1d7da8.apps.googleusercontent.com",
     expoClientId: "420870778500-den8oc1mtl2es0opq4tu4v1n6ohi29t7.apps.googleusercontent.com"
+    // expoClientId: "420870778500-bfs7guhtoe3a99jden68968i3iu7qe97.apps.googleusercontent.com"
+
   });
 
 
@@ -70,7 +74,10 @@ setLang(Marathi)
 GetLangLocal()
 
   },[focused])
+
   
+
+
   
   const handleLogin = () => {
     if (!Email) {
@@ -91,23 +98,21 @@ GetLangLocal()
       // Add your login logic here
     };
 
-    React.useEffect(() => {
-      setMessage(JSON.stringify(response));
-      if (response?.type === "success") {
-
-        setAccessToken(response.authentication.accessToken);
-        LoginGoogleFirebase(response.authentication.accessToken)
-        setErrosetResponseField(true)
-      }
-    }, [response]);
+      React.useEffect(() => {
+        if (response?.type === "success") {
+          setAccessToken(response.authentication.accessToken);
+          LoginGoogleFirebase(response.authentication.accessToken)
+        }
+      }, [response]);
   
-    async function getUserData(token) {
+    async function getUserData() {
       let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
-        headers: { Authorization: `Bearer ${token}`}
+        headers: { Authorization: `Bearer ${accessToken}`}
       });
   
       userInfoResponse.json().then(data => {
         setUserInfo(data);
+        console.log(data)
       });
     }
 
@@ -161,7 +166,7 @@ async function LoginFirebaseApple(token){
     await AsyncStorage.setItem("user", JSON.stringify(user));
     await AsyncStorage.setItem("identifier", "apple");
 
-    await AsyncStorage.setItem("password","null")
+    // await AsyncStorage.setItem("password","null")
     NavigatorHandler()
     setLoading(false)
 
@@ -179,7 +184,7 @@ async function LoginFirebaseApple(token){
 
 
 async function LoginGoogleFirebase(token){
-
+console.log(token)
   try {
     const googleCredential = GoogleAuthProvider.credential(null, token);
 
@@ -187,9 +192,8 @@ async function LoginGoogleFirebase(token){
     const userCredential = await signInWithCredential(auth, googleCredential);
     const user = userCredential.user;
     await AsyncStorage.setItem("user", JSON.stringify(user));
-    await AsyncStorage.setItem("identifier", "null");
-    setUid(user.uid)
-    await AsyncStorage.setItem("password",password)
+    await AsyncStorage.setItem("identifier", "google");
+
     NavigatorHandler()
     setLoading(false)
 
@@ -197,11 +201,7 @@ async function LoginGoogleFirebase(token){
     const errorCode = error.code;
     const errorMessage = error.message;
     console.error(errorCode, errorMessage);
-    setErrorMessage(errorMessage)
-    // Alert.alert("Error",errorMessage)
-    // setLoading(false)
 
-    // Handle errors here
   }
 }
 
@@ -245,7 +245,15 @@ async function LoginGoogleFirebase(token){
     }
   
   return (
-    <View style={AuthStyles.container}>
+    <SafeAreaView style={AuthStyles.container}>
+      {/* <ScrollView> */}
+      <View
+      style={{alignSelf:'flex-start',marginLeft:20}}
+      >
+
+      <GoBack/>
+      </View>
+
     {/* Logo or image */}
     <View style={AuthStyles.logoContainer}>
       {/* Your logo or image */}
@@ -254,19 +262,19 @@ async function LoginGoogleFirebase(token){
     </View>
     
     {/* Email Field */}
-    {/* <View style={[AuthStyles.inputContainer, { borderColor: EmailError && !Email? 'red' : '#3C3737' }]}>
+    <View style={[AuthStyles.inputContainer, { borderColor: EmailError && !Email? 'red' : '#3C3737' }]}>
       <AntDesign name="user" size={24} color="white" />
       <TextInput
         style={AuthStyles.input}
         placeholder="Email"
         placeholderTextColor="#808080"
         onChangeText={(text) => setEmail(text)}
-      />
-    </View> */}
+      />  
+    </View>
     <Text style={AuthStyles.errorText}>{!Email && EmailError}</Text>
 
     {/* Password Field */}
-    {/* <View style={[AuthStyles.inputContainer, { borderColor: passwordError && !password ? 'red' : '#3C3737' }]}>
+    <View style={[AuthStyles.inputContainer, { borderColor: passwordError && !password ? 'red' : '#3C3737' }]}>
       <AntDesign name="lock" size={24} color="white" />
       <TextInput
         style={AuthStyles.input}
@@ -275,17 +283,8 @@ async function LoginGoogleFirebase(token){
         secureTextEntry
         onChangeText={(text) => setPassword(text)}
       />
-    </View> */}
-    <Text style={AuthStyles.errorText}>{!password &&passwordError}</Text>
-    <Text style={AuthStyles.errorText}>{message}</Text>
-    <Text style={AuthStyles.errorText}>{responseField === true&& "UseEffect Called"}</Text>
-    <Text style={AuthStyles.errorText}>{"Google error:" +errorMessage}</Text>
-    <Text style={AuthStyles.errorText}>{"access Token"+accessToken}</Text>
-    <Text style={AuthStyles.errorText}>{"uid"+uid}</Text>
-
-
-
-    {/* Login Button */}
+    </View>
+   
     {
       loading === false ?
     <TouchableOpacity style={AuthStyles.button} onPress={()=> handleLogin()}>
@@ -299,16 +298,12 @@ async function LoginGoogleFirebase(token){
     </TouchableOpacity>
     }
 
-
-    {/* Login with Gmail Button */}
     <TouchableOpacity
-     onPress={accessToken ? getUserData : () => { promptAsync({showInRecents: true}) }}
+     onPress={ () => { promptAsync({showInRecents: true}) }}
     style={[AuthStyles.button, { backgroundColor: Colors.SecondaryDark }]}>
       <AntDesign name="google" size={24} color="white" />
       <Text style={[AuthStyles.buttonText, { color: 'white' }]}>{Lang.LoginTScreenxt.Button2Txt}</Text>
     </TouchableOpacity>
-
-
 
     <AppleAuthentication.AppleAuthenticationButton
         buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
@@ -320,13 +315,18 @@ async function LoginGoogleFirebase(token){
 
     {/* Forgot Password and Sign Up */}
     <View style={AuthStyles.footer}>
-      <Text style={AuthStyles.footerText}>{Lang.LoginTScreenxt.BottomTxt1}</Text>
+      <Text                
+      
+      onPress={()=> navigation.navigate("ForgetPassword")}
+style={AuthStyles.footerText}>{Lang.LoginTScreenxt.BottomTxt1}</Text>
       <Text 
               onPress={()=> navigation.navigate("SignUp")}
 
       style={AuthStyles.footerText}>{Lang.LoginTScreenxt.BottomTxt2}</Text>
     </View>
-  </View>
+    {/* </ScrollView> */}
+
+  </SafeAreaView>
   );
 };
 

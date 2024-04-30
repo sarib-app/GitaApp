@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet,TouchableOpacity, Alert,SafeAreaView } from 'react-native';
 import GlobalStyles from '../../Global/Styling/GlobalStyles';
 import { Colors } from '../../Global/Styling/Branding';
 import { useNavigation } from '@react-navigation/native';
@@ -13,13 +13,21 @@ import { auth } from '../../config/firebase';
 import updateEmaill from '../../Components/GlobalCalls/UpdateEmail';
 import { Eng, Gujrati,Hindi,Marathi} from '../../Global/Data/Language';
 import { useIsFocused } from '@react-navigation/native';
+import { getUserSubscriptionData } from '../../Components/GlobalCalls/GetUserTableData';
+import GoBack from '../../Global/Styling/BackButton';
+
 
 const AccountScreen = () => {
 const navigation = useNavigation()
 const [user,setUser]=useState(null)
+const [subscriptionData,setSubscriptionData]=useState(null)
+const [PackageValid,setPackageValid]=useState(false)
+const [loading,setLoading]=useState(false)
+
 const [email,setEmail]=useState()
 const [oldPassword,setOldPassword]=useState(0)
 const [Lang,setLang]=useState(Eng)
+const [identifier,setidentifier]=useState("")
 
 
 const focused= useIsFocused()
@@ -50,44 +58,133 @@ useEffect(()=>{
 
 
   GetData()
-},[])
+},[focused])
+
   
 async function GetData(){
 
   const getPassword = await AsyncStorage.getItem("password")
-  
-console.log(getPassword)
+  const identifier = await AsyncStorage.getItem("identifier")
+  setidentifier(identifier)
+    const userData = await AsyncStorage.getItem("user")
+  const ParsedUser = JSON.parse(userData)
+  setUser(ParsedUser)
+  fetchSubscriptionData(ParsedUser.uid)
+console.log(ParsedUser)
   setOldPassword(getPassword)
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-     
-      setUser(user)
-      // ...
-    } else {
-      // User is signed out
-      // ...
-      console.log("dsa")
-    }
-  });
+ 
 }
+
+const today = new Date()
+
+const fetchSubscriptionData = async (userUid) => {
+  setLoading(true)
+  try {
+    const data = await getUserSubscriptionData(userUid);
+    if (data) {
+      // Convert Firestore Timestamps to JavaScript Dates
+      const subscriptionDate = data.subscriptionDate ? new Date(data.subscriptionDate.seconds * 1000) : null;
+      const expDate = data.ExpDate ? new Date(data.ExpDate.seconds * 1000) : null;
+
+      // Create a new object that replaces the Firestore Timestamps with JavaScript Date objects
+      const subscriptionDataWithDates = {
+        ...data,
+        subscriptionDate,
+        ExpDate: expDate
+      };
+
+      
+
+      setSubscriptionData(subscriptionDataWithDates);
+      if (expDate && expDate >= today) {
+        setPackageValid(true); // Set a state variable to indicate whether to show ads
+      } 
+    }
+  } catch (error) {
+    // Handle any errors that occur during the fetch operation
+    Alert.alert("Error","Could not fetch package details!")
+  }finally{
+    setLoading(false)
+  }
+};
+
+
+
+
+function handleavigator(){
+  if(PackageValid){
+
+
+    Alert.alert(
+      "Please Wait", // Title
+      `You currently have a valid ${subscriptionData?.pacakgeTaken} package, you want to upgrade/re-new?`, // Message
+      [
+        // The "Yes" button
+        {
+          text: "Yes I want to upgrade",
+          onPress: () => {
+            // Call the function to open the store here
+            navigation.navigate("PackageScreen");
+          },
+        },
+        // The "No" button
+        {
+          text: "No",
+          onPress: () => {
+            // Perhaps update app state or inform analytics of the user's choice
+            console.log("User chose not to rate the app.");
+          },
+        },
+      ])
+ }else{
+
+   navigation.navigate("PackageScreen")
+ }
+
+
+}
+
   return (
-    <View style={GlobalStyles.container}>
+    <SafeAreaView style={GlobalStyles.container}>
+   
+  
+      {/* <GoBack/> */}
+   
       {/* Title */}
     <View style={AccountStyle.container}>
+    <View
+      style={{}}
+      >
 
+      <GoBack/>
+      </View>
       <Text style={AccountStyle.title}>Accounts</Text>
       <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.SubscriptionTitle}</Text>
 
-<TouchableOpacity 
-       onPress={()=> navigation.navigate("SubscribeNow")}
+
+{
+  loading === false &&
+  <TouchableOpacity 
+       onPress={()=> 
+        handleavigator()
+      }
        style={AccountStyle.chapterInfo}>
-       
-       <Text style={AccountStyle.chapterTitle}>{Lang.AccountScreenTxt.SusbcriptionTxt1}</Text>
+       {
+        subscriptionData && PackageValid?
+   <>
+        <Text style={AccountStyle.chapterTitle}>👑 {subscriptionData?.pacakgeTaken.toUpperCase()}</Text>
+        <Text style={AccountStyle.chapterDescription}>{Lang.AccountScreenTxt.SusbcriptionTxt3 + ":" + subscriptionData?.ExpDate}</Text>
+</>
+:<>
+         <Text style={AccountStyle.chapterTitle}>{Lang.AccountScreenTxt.SusbcriptionTxt1}</Text>
        <Text style={AccountStyle.chapterDescription}>{Lang.AccountScreenTxt.SusbcriptionTxt3}</Text>
+       </>
+
+      }
     
      </TouchableOpacity>
+}
+
      
   
 
@@ -97,25 +194,25 @@ console.log(getPassword)
       {/* You can map over your chapters data and render each chapter */}
       <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.nameTitle}</Text>
 
-      <View style={AccountStyle.chapterInfo}>
+      <View style={[AccountStyle.chapterInfo,{justifyContent:'center'}]}>
              
-             <Text style={AccountStyle.chapterTitle}>{"John Smith"}</Text>
-             <Text style={AccountStyle.chapterDescription}>{"Update Account name"}</Text>
+             <Text style={[AccountStyle.chapterTitle,{marginTop:0}]}>{user?.displayName}</Text>
+             {/* <Text style={AccountStyle.chapterDescription}>{"Update Account name"}</Text> */}
           
            </View>
 
 
            <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.EmailTitle}</Text>
 
-<View style={AccountStyle.chapterInfo}>
+<View style={[AccountStyle.chapterInfo,{justifyContent:'center'}]}>
        
-       <TextInput 
-       onChangeText={(e)=> setEmail(e)}
-       onEndEditing={()=>{ oldPassword != "null" &&
-        updateEmaill(email,oldPassword)
-       }}
-       style={AccountStyle.chapterTitle}>{user?.email}</TextInput>
-       <Text style={AccountStyle.chapterDescription}>{"Update Account Email"}</Text>
+       <Text 
+      //  onChangeText={(e)=> setEmail(e)}
+      //  onEndEditing={()=>{ oldPassword != "null" &&
+      //   updateEmaill(email,oldPassword)
+      //  }}
+      style={[AccountStyle.chapterTitle,{marginTop:0}]}>{user?.email}</Text>
+       {/* <Text style={AccountStyle.chapterDescription}>{"Update Account Email"}</Text> */}
     
      </View>
 
@@ -123,7 +220,7 @@ console.log(getPassword)
 
 
 {
-  oldPassword != "null" &&
+  identifier === "firebase" &&
 
   <>
      <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.PasswordTitle}</Text>
@@ -140,20 +237,20 @@ style={[AccountStyle.chapterInfo,{height:50}]}>
 }
 
 
-     <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.PaymentTitle}</Text>
+     {/* <Text style={[AccountStyle.chapterDescription,{marginLeft:0}]}>{Lang.AccountScreenTxt.PaymentTitle}</Text> */}
 
-<View style={AccountStyle.chapterInfo}>
+{/* <View style={AccountStyle.chapterInfo}>
        
        <Text style={AccountStyle.chapterTitle}>{Lang.AccountScreenTxt.PaymentTxt1} 1235</Text>
        <Text style={AccountStyle.chapterDescription}>{Lang.AccountScreenTxt.PaymentTxt2}</Text>
     
-     </View>
+     </View> */}
 
 
 
     </View>
 
-    </View>
+    </SafeAreaView>
   );
 };
 

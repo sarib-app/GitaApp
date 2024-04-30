@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "git-app",
+    "name": "Bhagavad Gita",
     "slug": "git-app",
-    "version": "1.0.1",
+    "version": "1.2.2",
     "orientation": "portrait", 
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -25,6 +25,8 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.app.gitapp"
+     
+
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,5 +38,9 @@
     },
     "scheme": "com.app.gitapp",
     "owner": "karanvani"
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-9024884895292195~1769088022",
+    "ios_app_id": "ca-app-pub-9024884895292195~1734127109"
   }
 }
