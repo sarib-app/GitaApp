@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Bhagavad Gita App",
+    "name": "Bhagavad Gita",
     "slug": "git-app",
-    "version": "1.0.1",
+    "version": "1.2.2",
     "orientation": "portrait", 
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
