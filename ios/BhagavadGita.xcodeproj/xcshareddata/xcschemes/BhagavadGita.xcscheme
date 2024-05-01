@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "gitapp.app"
-               BlueprintName = "gitapp"
-               ReferencedContainer = "container:gitapp.xcodeproj">
+               BuildableName = "BhagavadGita.app"
+               BlueprintName = "BhagavadGita"
+               ReferencedContainer = "container:BhagavadGita.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "gitappTests.xctest"
-               BlueprintName = "gitappTests"
-               ReferencedContainer = "container:gitapp.xcodeproj">
+               BuildableName = "BhagavadGitaTests.xctest"
+               BlueprintName = "BhagavadGitaTests"
+               ReferencedContainer = "container:BhagavadGita.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "gitapp.app"
-            BlueprintName = "gitapp"
-            ReferencedContainer = "container:gitapp.xcodeproj">
+            BuildableName = "BhagavadGita.app"
+            BlueprintName = "BhagavadGita"
+            ReferencedContainer = "container:BhagavadGita.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "gitapp.app"
-            BlueprintName = "gitapp"
-            ReferencedContainer = "container:gitapp.xcodeproj">
+            BuildableName = "BhagavadGita.app"
+            BlueprintName = "BhagavadGita"
+            ReferencedContainer = "container:BhagavadGita.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
