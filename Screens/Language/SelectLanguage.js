@@ -75,8 +75,7 @@ async function SetTheLanguage(){
 
 async function onLangSeclection (lang){
   setSelectLang(lang)
-  await AsyncStorage.setItem("selectedLang",lang)
-
+  // await AsyncStorage.setItem("selectedLang",lang)
 }
 
 function LanguageList({item}){
@@ -97,7 +96,10 @@ style={[Language.button,{backgroundColor:item.title === SelectLang ? Colors.ligh
       
       {/* Title */}
     <View style={HomeStyles.container}>
+      {
+        selection !=null  &&
       <GoBack/>
+      }
 
       <Text style={[HomeStyles.title,{marginTop:20}]}>{Lang.LanguageScreenTxt.Title}</Text>
 

@@ -128,7 +128,7 @@ async function loginWithApple(){
       ],
     });
     console.log(credential.identityToken)
-    LoginFirebaseApple(credential.identityToken)
+    // LoginFirebaseApple(credential.identityToken)
     // signed in
   } catch (e) {
     console.log(e)
@@ -307,14 +307,39 @@ console.log(token)
       <Text style={[AuthStyles.buttonText, { color: 'white' }]}>{Lang.LoginTScreenxt.Button2Txt}</Text>
     </TouchableOpacity>
 
-    <AppleAuthentication.AppleAuthenticationButton
+    {/* <AppleAuthentication.AppleAuthenticationButton
         buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
         buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
         cornerRadius={5}
         style={AuthStyles.button}
         onPress={ () => loginWithApple()}
-      />
+      /> */}
 
+
+
+<AppleAuthentication.AppleAuthenticationButton
+        buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+        buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+        cornerRadius={5}
+        style={AuthStyles.button}
+        onPress={async () => {
+          try {
+            const credential = await AppleAuthentication.signInAsync({
+              requestedScopes: [
+                AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+                AppleAuthentication.AppleAuthenticationScope.EMAIL,
+              ],
+            });
+            // signed in
+          } catch (e) {
+            if (e.code === 'ERR_REQUEST_CANCELED') {
+              // handle that the user canceled the sign-in flow
+            } else {
+              // handle other errors
+            }
+          }
+        }}
+      />
     {/* Forgot Password and Sign Up */}
     <View style={AuthStyles.footer}>
       <Text                
